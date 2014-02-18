@@ -18,4 +18,8 @@ Motion::Project::App.setup do |app|
     pod 'Harpy'
     pod 'TestFlightSDK'
   end
+
+  app.release do
+    app.info_plist['AppStoreRelease'] = true
+  end
 end

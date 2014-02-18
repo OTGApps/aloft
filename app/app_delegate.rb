@@ -1,6 +1,7 @@
 class AppDelegate < ProMotion::Delegate
 
   tint_color UIColor.whiteColor
+
   attr_accessor :main_screen
 
   def on_load(app, options)
@@ -15,6 +16,8 @@ class AppDelegate < ProMotion::Delegate
   end
 
   def setup
+    BW.debug = true unless App.info_plist['AppStoreRelease'] == true
+
     if defined? TestFlight
       TestFlight.setDeviceIdentifier UIDevice.currentDevice.uniqueIdentifier
       TestFlight.takeOff "e9a2e874-1b13-426c-ad0f-6958e7b2889c"
