@@ -1,12 +1,13 @@
 class AppDelegate < ProMotion::Delegate
 
-  tint_color "#D3541F".to_color
+  tint_color UIColor.whiteColor
   attr_accessor :main_screen
 
   def on_load(app, options)
     BubbleWrap.use_weak_callbacks = true
 
     setup
+    appearance
 
     self.main_screen = WindsScreen.new(nav_bar: true)
     open self.main_screen
@@ -38,6 +39,14 @@ class AppDelegate < ProMotion::Delegate
       Harpy.sharedInstance.setAppID app_id
       Harpy.sharedInstance.checkVersion
     end
+  end
+
+  def appearance
+    nav_bar = UINavigationBar.appearance
+    nav_bar.setBarTintColor( "#66d9ef".to_color )
+    # nav_bar.setTitleTextAttributes({
+    #   UITextAttributeFont => UIFont.fontWithName('Trebuchet MS', size:24),
+    # })
   end
 
   #Flurry exception handler

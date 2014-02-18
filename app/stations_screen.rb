@@ -3,13 +3,13 @@ class StationsScreen < PM::TableScreen
 
   def on_load
     set_attributes self.view, { backgroundColor: UIColor.whiteColor }
-    set_nav_bar_button :left, title: "Cancel", action: :close
+    set_nav_bar_button :left, title: "Close", action: :close
     refresh
   end
 
   def table_data
     [{
-      title: "Select reporting station near you:",
+      title: "Select weather station near you:",
       cells: stations_close_to_user
     }]
   end
@@ -30,11 +30,17 @@ class StationsScreen < PM::TableScreen
     stations.map do |station|
       {
         title: station[:name],
-        subtitle: "About #{station[:current_distance].miles.round} miles away",
+        subtitle: subtitle(station),
         action: :select_station,
         arguments: { station: station }
       }
     end
+  end
+
+  def subtitle(station)
+    miles = station[:current_distance].miles.round
+    state = MotionWinds::State.abbrev(station[:state])
+    "About #{miles} miles away. #{station[:city]}, #{state}"
   end
 
   def select_station(args = {})

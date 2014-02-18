@@ -3,10 +3,17 @@ class WindsScreen < PM::TableScreen
 
   def on_load
     set_attributes self.view, { backgroundColor: UIColor.whiteColor }
+    set_nav_bar_right_button UIImage.imageNamed("location-cloud.png"), action: :open_stations
   end
 
   def on_appear
-    open_modal StationsScreen.new(nav_bar: true), animated: false unless App::Persistence['station']
+    open_stations(false, false)
+  end
+
+  def open_stations(animated = true, force = true)
+    if App::Persistence['station'].nil? || force
+      open_modal StationsScreen.new(nav_bar: true), animated: animated
+    end
   end
 
   def table_data
