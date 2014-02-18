@@ -3,6 +3,7 @@ class StationsScreen < PM::TableScreen
 
   def on_load
     set_attributes self.view, { backgroundColor: UIColor.whiteColor }
+    set_nav_bar_button :left, title: "Cancel", action: :close
     refresh
   end
 
@@ -29,9 +30,20 @@ class StationsScreen < PM::TableScreen
     stations.map do |station|
       {
         title: station[:name],
-        subtitle: "About #{station[:current_distance].miles.round} miles away"
+        subtitle: "About #{station[:current_distance].miles.round} miles away",
+        action: :select_station,
+        arguments: { station: station }
       }
     end
+  end
+
+  def select_station(args = {})
+    App::Persistence['station'] = args[:station][:code]
+    close
+  end
+
+  def close
+    dismissModalViewControllerAnimated(true)
   end
 
 end

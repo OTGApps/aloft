@@ -8,7 +8,7 @@ class AppDelegate < ProMotion::Delegate
 
     setup
 
-    self.main_screen = StationsScreen.new(nav_bar: true)
+    self.main_screen = WindsScreen.new(nav_bar: true)
     open self.main_screen
     true
   end
