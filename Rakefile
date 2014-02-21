@@ -7,6 +7,7 @@ begin
   Bundler.require
 rescue LoadError
 end
+require 'afmotion'
 
 Motion::Project::App.setup do |app|
   # Use `rake config' to see complete project settings.

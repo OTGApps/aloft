@@ -18,8 +18,15 @@ class WindsScreen < PM::TableScreen
 
   def table_data
     [{
-      cells: [{title:'test'}, {title:'test2'}]
+      cells: %w(3000 6000 12000 18000 24000 30000 34000 39000).map { |h| cell(h, 12, 270) }
     }]
+  end
+
+  def cell(height, speed, bearing)
+    {
+      title: "#{height} feet",
+      subtitle: "#{speed} knots, bearing #{bearing} degrees."
+    }
   end
 
 end

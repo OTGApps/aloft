@@ -5,7 +5,7 @@ class AppDelegate < ProMotion::Delegate
   attr_accessor :main_screen
 
   def on_load(app, options)
-    BubbleWrap.use_weak_callbacks = true
+    # BubbleWrap.usere_weak_callbacks = true
 
     setup
     appearance
@@ -46,10 +46,14 @@ class AppDelegate < ProMotion::Delegate
 
   def appearance
     nav_bar = UINavigationBar.appearance
-    nav_bar.setBarTintColor( "#66d9ef".to_color )
-    # nav_bar.setTitleTextAttributes({
+    nav_bar.setBarStyle UIBarStyleBlack
+    nav_bar.setBarTintColor "#15adca".to_color
+    nav_bar.setTintColor UIColor.whiteColor
+    nav_bar.setTitleTextAttributes({
     #   UITextAttributeFont => UIFont.fontWithName('Trebuchet MS', size:24),
-    # })
+      # UITextAttributeTextShadowColor => UIColor.colorWithWhite(0.0, alpha:0.4),
+      UITextAttributeTextColor => UIColor.whiteColor
+    })
   end
 
   #Flurry exception handler

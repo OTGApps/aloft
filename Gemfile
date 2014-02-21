@@ -6,5 +6,5 @@ gem "motion-cocoapods"
 # RubyMotion
 gem 'bubble-wrap', :github => 'rubymotion/BubbleWrap', :require => ['bubble-wrap/core', 'bubble-wrap/location']
 gem 'ProMotion', :github => 'clearsightstudio/ProMotion', :branch => 'edge'
-gem 'motion-winds', path: '../motion-winds'
+gem 'afmotion', '~> 2.1.0'
 gem 'awesome_print_motion'

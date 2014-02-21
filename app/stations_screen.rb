@@ -3,14 +3,15 @@ class StationsScreen < PM::TableScreen
 
   def on_load
     set_attributes self.view, { backgroundColor: UIColor.whiteColor }
-    set_nav_bar_button :left, title: "Close", action: :close
+    @stations = []
+    set_nav_bar_button(:left, title: "Close", action: :close) unless App::Persistence['station'].nil?
     refresh
   end
 
   def table_data
     [{
       title: "Select weather station near you:",
-      cells: stations_close_to_user
+      cells: @stations
     }]
   end
 
@@ -18,28 +19,29 @@ class StationsScreen < PM::TableScreen
     ap "refreshing"
     BW::Location.get_once do |location|
       ap "got location."
-      @location = location
-      update_table_data
+      find_stations(location)
     end
   end
 
-  def stations_close_to_user
-    return [] if @location.nil?
+  def find_stations(location)
+    ap "finding stations"
+    Stations.sharedClient.sorted_by_distance_from(location) do |s|
 
-    stations = MotionWinds.sorted_by_distance_from(@location)
-    stations.map do |station|
-      {
-        title: station[:name],
-        subtitle: subtitle(station),
-        action: :select_station,
-        arguments: { station: station }
-      }
+      @stations = s.map do |station|
+        {
+          title: station[:name],
+          subtitle: subtitle(station),
+          action: :select_station,
+          arguments: { station: station }
+        }
+      end
+      update_table_data
     end
   end
 
   def subtitle(station)
     miles = station[:current_distance].miles.round
-    state = MotionWinds::State.abbrev(station[:state])
+    state = station[:state_abbrev]
     "About #{miles} miles away. #{station[:city]}, #{state}"
   end
 
