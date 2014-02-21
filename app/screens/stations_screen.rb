@@ -32,6 +32,7 @@ class StationsScreen < PM::TableScreen
           title: station[:name],
           subtitle: subtitle(station),
           action: :select_station,
+          height: 50,
           arguments: { station: station }
         }
       end

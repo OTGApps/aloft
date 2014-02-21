@@ -11,11 +11,6 @@ class WindCell < PM::TableViewCell
     self
   end
 
-  # def setup(data_cell, screen)
-  #   cell = super(data_cell, screen)
-  #   cell
-  # end
-
   # def altitude= a
   #   @altitude.text = a
   # end
