@@ -44,10 +44,14 @@ class AppDelegate < ProMotion::Delegate
     end
   end
 
+  def app_color
+    Color.new("#15adca")
+  end
+
   def appearance
     nav_bar = UINavigationBar.appearance
     nav_bar.setBarStyle UIBarStyleBlack
-    nav_bar.setBarTintColor "#15adca".to_color
+    nav_bar.setBarTintColor app_color.to_color
     nav_bar.setTintColor UIColor.whiteColor
     nav_bar.setTitleTextAttributes({
     #   UITextAttributeFont => UIFont.fontWithName('Trebuchet MS', size:24),

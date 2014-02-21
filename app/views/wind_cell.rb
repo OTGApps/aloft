@@ -1,19 +1,23 @@
 class WindCell < PM::TableViewCell
+  attr_accessor :azimuth, :bearing, :speed, :altitude, :temperature
 
   # This method is used by ProMotion to instantiate cells.
   def initWithStyle(style_name, reuseIdentifier: reuseIdentifier)
     super
-    # self.position_label = subview(UILabel, :position_label, styleClass:"position_label")
-    # self.addSubview(self.position_label)
+    rmq.stylesheet = CellStylesheet
+
+    # @altitude = rmq.append(UILabel, :altitude).get
+
     self
   end
 
-  def setup(data_cell, screen)
-    cell = super(data_cell, screen)
+  # def setup(data_cell, screen)
+  #   cell = super(data_cell, screen)
+  #   cell
+  # end
 
-    # Do Stuff
-
-    cell
-  end
+  # def altitude= a
+  #   @altitude.text = a
+  # end
 
 end
