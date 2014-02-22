@@ -6,13 +6,24 @@ class WindCell < PM::TableViewCell
     super
     rmq.stylesheet = CellStylesheet
 
-    # @altitude = rmq.append(UILabel, :altitude).get
+    @altitude = rmq.append(UILabel)
+    # @azimuth = rmq.append(UIImage).get
 
     self
   end
 
-  # def altitude= a
-  #   @altitude.text = a
+  # Apply the styles once the cell is at the proper height
+  def layoutSubviews
+    @altitude.apply_style(:altitude)
+    # @azimuth.get.apply_style(:azimuth)
+  end
+
+  def altitude= a
+    @altitude.get.text = a
+  end
+
+  # def azimuth= i
+  #   @azimuth.image = i
   # end
 
 end

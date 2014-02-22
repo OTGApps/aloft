@@ -2,16 +2,16 @@ class WindsScreen < PM::TableScreen
   title "Winds Aloft"
 
   def on_load
-    # set_attributes self.view, { backgroundColor: UIColor.whiteColor }
-    set_nav_bar_right_button UIImage.imageNamed('location-cloud'), action: :open_stations
+    rmq.stylesheet = WindsStylesheet
 
-    set_attributes table_view, {
-      scroll_enabled: false,
-      separatorStyle: UITableViewCellSeparatorStyleNone
-    }
+    view.rmq.apply_style :root_view
+    table_view.rmq.apply_style :winds_table
+
     self.navigationController.navigationBar.translucent = false
     self.automaticallyAdjustsScrollViewInsets = false
     self.edgesForExtendedLayout = UIRectEdgeNone
+
+    set_nav_bar_right_button UIImage.imageNamed('location-cloud'), action: :open_stations
   end
 
   def on_appear
@@ -32,6 +32,7 @@ class WindsScreen < PM::TableScreen
 
   def cell_height
     @cell_h ||= (table_view.size.height / wind_heights.count)
+    # 100
   end
 
   def cell_background_color(index)
@@ -47,13 +48,19 @@ class WindsScreen < PM::TableScreen
     {
       title: "#{height} feet",
       subtitle: "#{speed} knots, bearing #{bearing} degrees.",
-      altitude: "#{height}",
       background_color: cell_background_color(index),
       height: cell_height,
       editing_style: :none,
       selection_style: UITableViewCellSelectionStyleNone,
       cell_class: WindCell,
+
+      altitude: "#{number_with_delimiter(height)}ft",
+      azimuth: UIImage.imageNamed('location-arrow'),
     }
+  end
+
+  def number_with_delimiter(number)
+    number.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse
   end
 
 end
