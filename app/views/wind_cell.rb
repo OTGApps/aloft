@@ -13,10 +13,10 @@ class WindCell < PM::TableViewCell
   end
 
   # Apply the styles once the cell is at the proper height
-  def layoutSubviews
-    @altitude.apply_style(:altitude)
-    # @azimuth.get.apply_style(:azimuth)
-  end
+  # def layoutSubviews
+  #   @altitude.apply_style(:altitude)
+  #   # @azimuth.get.apply_style(:azimuth)
+  # end
 
   def altitude= a
     @altitude.get.text = a

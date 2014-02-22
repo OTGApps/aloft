@@ -1,7 +1,7 @@
 class Stations
   API_URL = "http://winds-aloft.mohawkapps.com/stations"
 
-  def self.sharedClient
+  def self.client
     Dispatch.once { @instance ||= new }
     @instance
   end

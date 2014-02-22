@@ -2,7 +2,9 @@ class StationsScreen < PM::TableScreen
   title "Weather Stations"
 
   def on_load
-    set_attributes self.view, { backgroundColor: UIColor.whiteColor }
+    rmq.stylesheet = StationsStylesheet
+    view.rmq.apply_style :root_view
+
     @stations = []
     set_nav_bar_button(:left, title: "Close", action: :close) unless App::Persistence['station'].nil?
     refresh
@@ -16,23 +18,23 @@ class StationsScreen < PM::TableScreen
   end
 
   def refresh
-    ap "refreshing"
+    ap "refreshing" if BW.debug?
     BW::Location.get_once do |location|
-      ap "got location."
+      ap "got location." if BW.debug?
       find_stations(location)
     end
   end
 
   def find_stations(location)
-    ap "finding stations"
-    Stations.sharedClient.sorted_by_distance_from(location) do |s|
+    ap "Finding stations" if BW.debug?
+    Stations.client.sorted_by_distance_from(location) do |s|
 
       @stations = s.map do |station|
         {
           title: station[:name],
           subtitle: subtitle(station),
           action: :select_station,
-          height: 50,
+          height: 60,
           arguments: { station: station }
         }
       end

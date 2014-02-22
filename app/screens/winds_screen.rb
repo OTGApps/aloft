@@ -16,6 +16,7 @@ class WindsScreen < PM::TableScreen
 
   def on_appear
     open_stations(false, false)
+    get_winds
   end
 
   def open_stations(animated = true, force = true)
@@ -25,8 +26,9 @@ class WindsScreen < PM::TableScreen
   end
 
   def table_data
+    return [{cells:[]}] unless @winds
     [{
-      cells: wind_heights.enum_for(:each_with_index).map { |h, i| cell(i, h, 12, 270) }
+      cells: wind_heights.enum_for(:each_with_index).map { |k, i| cell(i, k) }
     }]
   end
 
@@ -36,25 +38,35 @@ class WindsScreen < PM::TableScreen
   end
 
   def cell_background_color(index)
-    percentage = "0.#{index+2}".to_f
+    percentage = "0.#{index}".to_f
     App.delegate.app_color.lighten(percentage).to_color
   end
 
-  def wind_heights
-    %w(3000 6000 12000 18000 24000 30000 34000 39000).reverse
+  def get_winds
+    return unless App::Persistence['station']
+
+    Winds.client.at_station(App::Persistence['station']) do |w|
+      @winds = w.last
+      update_table_data
+    end
   end
 
-  def cell(index, height, speed, bearing)
+  def wind_heights
+    @winds.keys.map(&:to_i).sort.reverse
+  end
+
+  def cell(index, key)
+    data = @winds[key.to_s]
     {
-      title: "#{height} feet",
-      subtitle: "#{speed} knots, bearing #{bearing} degrees.",
+      title: "#{number_with_delimiter(key)} feet",
+      subtitle: "#{data['speed']} knots, bearing #{data['bearing']} degrees. (#{data['temp']}°C)",
       background_color: cell_background_color(index),
       height: cell_height,
       editing_style: :none,
       selection_style: UITableViewCellSelectionStyleNone,
       cell_class: WindCell,
 
-      altitude: "#{number_with_delimiter(height)}ft",
+      altitude: "#{number_with_delimiter(key)}ft",
       azimuth: UIImage.imageNamed('location-arrow'),
     }
   end
