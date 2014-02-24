@@ -11,11 +11,12 @@ class WindsScreen < PM::TableScreen
     self.automaticallyAdjustsScrollViewInsets = false
     self.edgesForExtendedLayout = UIRectEdgeNone
 
-    set_nav_bar_right_button UIImage.imageNamed('location-cloud'), action: :open_stations
+    set_nav_bar_right_button UIImage.imageNamed('wind'), action: :open_stations
   end
 
   def on_appear
     open_stations(false, false)
+    setTitle('Winds Aloft', subtitle:"at #{App::Persistence['station']}")
     get_winds
   end
 
@@ -28,13 +29,12 @@ class WindsScreen < PM::TableScreen
   def table_data
     return [{cells:[]}] unless @winds
     [{
-      cells: wind_heights.enum_for(:each_with_index).map { |k, i| cell(i, k) }
+      cells: (wind_heights.enum_for(:each_with_index).map { |k, i| cell(i, k) }) << info_cell
     }]
   end
 
   def cell_height
-    @cell_h ||= (table_view.size.height / wind_heights.count)
-    # 100
+    @cell_h ||= (table_view.size.height - info_cell_height) / wind_heights.count
   end
 
   def cell_background_color(index)
@@ -67,8 +67,24 @@ class WindsScreen < PM::TableScreen
       cell_class: WindCell,
 
       altitude: "#{number_with_delimiter(key)}ft",
-      azimuth: UIImage.imageNamed('location-arrow'),
+      azimuth: azimuth_image,
+      bearing: data['bearing'],
     }
+  end
+
+  def info_cell
+    {
+      title: "This is a test",
+      height: info_cell_height,
+    }
+  end
+
+  def info_cell_height
+    10
+  end
+
+  def azimuth_image
+    @ai ||= UIImage.imageNamed('arrow').imageWithRenderingMode(UIImageRenderingModeAlwaysTemplate)
   end
 
   def number_with_delimiter(number)
