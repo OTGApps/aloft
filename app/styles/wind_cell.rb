@@ -4,6 +4,8 @@ class CellStylesheet < WindsStylesheet
   ALTITUDE_WIDTH = 70
   LABEL_WIDTH    = 100
 
+  def debug? ; true ; end
+
   def altitude(st)
     st.font = font.tiny
     st.text_alignment = :right
@@ -12,7 +14,7 @@ class CellStylesheet < WindsStylesheet
     st.from_bottom = PADDING
     st.from_right = PADDING
 
-    st.background_color = UIColor.blueColor
+    st.background_color = UIColor.blueColor if debug?
   end
 
   def azimuth(st)
@@ -25,7 +27,7 @@ class CellStylesheet < WindsStylesheet
       l: PADDING
     }
 
-    st.background_color = UIColor.redColor
+    st.background_color = UIColor.redColor if debug?
   end
 
   def bearing(st)
@@ -37,7 +39,7 @@ class CellStylesheet < WindsStylesheet
     st.left        = PADDING
     st.from_bottom = PADDING
 
-    st.background_color = UIColor.orangeColor
+    st.background_color = UIColor.orangeColor if debug?
   end
 
   def speed(st)
@@ -51,7 +53,8 @@ class CellStylesheet < WindsStylesheet
     }
     st.font = font.medium
     st.text_alignment = :left
-    st.background_color = UIColor.greenColor
+
+    st.background_color = UIColor.greenColor if debug?
   end
 
   def temperature(st)
@@ -63,7 +66,8 @@ class CellStylesheet < WindsStylesheet
     }
     st.font = font.medium
     st.text_alignment = :left
-    st.background_color = UIColor.magentaColor
+
+    st.background_color = UIColor.magentaColor if debug?
   end
 
   def azimuth_size(st)
