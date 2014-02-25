@@ -12,6 +12,7 @@ class WindsScreen < PM::TableScreen
     self.edgesForExtendedLayout = UIRectEdgeNone
 
     set_nav_bar_right_button UIImage.imageNamed('wind'), action: :open_stations
+    set_nav_bar_left_button UIImage.imageNamed('settings'), action: :open_stations
   end
 
   def on_appear
