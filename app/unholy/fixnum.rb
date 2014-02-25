@@ -1,9 +1,17 @@
 class Fixnum
-  def self.celcius
+  def celcius
     "#{self}° C"
   end
 
-  def self.fahrenheit
-    "#{(self * 1.8) + 32}° F"
+  def fahrenheit
+    "#{((self * 1.8) + 32).round(1)}° F"
+  end
+
+  def knots
+    "#{self} knots"
+  end
+
+  def mph
+    "#{(self * 1.15077945).round(1)} mph"
   end
 end

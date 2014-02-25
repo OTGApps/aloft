@@ -2,13 +2,14 @@ class CellStylesheet < WindsStylesheet
 
   BEARING_HEIGHT = 10
   ALTITUDE_WIDTH = 70
-  LABEL_WIDTH    = 100
+  LABEL_WIDTH    = 115
 
-  def debug? ; true ; end
+  # Change this value to true to change
+  # the background colors of the labels.
+  def debug? ; false ; end
 
   def altitude(st)
     st.font = font.tiny
-    st.text_alignment = :right
     st.resize_to_fit_text
 
     st.from_bottom = PADDING
@@ -43,8 +44,7 @@ class CellStylesheet < WindsStylesheet
   end
 
   def speed(st)
-    left = PADDING + st.super_height + (PADDING * 3)
-
+    left = (PADDING * 2) + azimuth_size(st) + PADDING
     st.frame = {
       l: left,
       t: PADDING,
@@ -58,14 +58,16 @@ class CellStylesheet < WindsStylesheet
   end
 
   def temperature(st)
+    left = (PADDING * 2) + azimuth_size(st) + PADDING + LABEL_WIDTH + PADDING
+
     st.frame = {
-      l: LABEL_WIDTH + st.super_height - (PADDING * 5) - BEARING_HEIGHT,
+      l: left,
       t: PADDING,
       w: LABEL_WIDTH,
       h: st.super_height - (2 * PADDING)
     }
     st.font = font.medium
-    st.text_alignment = :left
+    st.text_alignment = :right
 
     st.background_color = UIColor.magentaColor if debug?
   end

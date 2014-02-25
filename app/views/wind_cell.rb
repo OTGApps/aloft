@@ -31,7 +31,7 @@ class WindCell < PM::TableViewCell
   end
 
   def speed= s
-    @speed.get.text = speed
+    @speed.get.text = s
   end
 
   def temperature= t

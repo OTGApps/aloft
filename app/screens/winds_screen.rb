@@ -66,8 +66,8 @@ class WindsScreen < PM::TableScreen
       cell_class: WindCell,
       azimuth: azimuth_image,
       bearing: nil,
-      # speed: nil,
-      # temp: nil
+      speed: nil,
+      temp: nil
     }
   end
 
@@ -78,8 +78,8 @@ class WindsScreen < PM::TableScreen
         background_color: cell_background_color(index),
         altitude: "#{number_with_delimiter(key)}ft",
         bearing: data['bearing'],
-        # speed: "#{data['speed']} knots",
-        # temperature: "#{data['temp']}°C"
+        speed: formatted_speed(data['speed']),
+        temperature: formatted_temp(data['temp'])
       })
     else
       base_cell.merge({
@@ -96,6 +96,22 @@ class WindsScreen < PM::TableScreen
       editing_style: :none,
       selection_style: UITableViewCellSelectionStyleNone,
     }
+  end
+
+  def formatted_temp(t)
+    if App::Persistence['metric'] == true
+      t.fahrenheit
+    else
+      t.celcius
+    end
+  end
+
+  def formatted_speed(s)
+    if App::Persistence['metric'] == true
+      s.knots
+    else
+      s.mph
+    end
   end
 
   def info_cell_height
