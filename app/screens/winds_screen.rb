@@ -34,13 +34,14 @@ class WindsScreen < PM::TableScreen
     }]
   end
 
+  def on_refresh ; get_winds ; end
+
   def cell_height
     @cell_h ||= (table_view.size.height - info_cell_height) / wind_heights.count
   end
 
   def cell_background_color(index)
-    percentage = "0.#{index}".to_f
-    App.delegate.app_color.lighten(percentage).to_color
+    %w(18c1e0 29cae9 40d0eb 57d6ed 6edbf0 85e1f2 9ce7f4 b3ecf7 caf2f9)[index].to_color
   end
 
   def get_winds
