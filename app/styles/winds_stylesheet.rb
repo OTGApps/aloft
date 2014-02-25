@@ -9,7 +9,7 @@ class WindsStylesheet < ApplicationStylesheet
   end
 
   def winds_table(st)
-    st.scroll_enabled = false
+    # st.scroll_enabled = false
     st.separator_style = :none
   end
 

@@ -7,6 +7,7 @@ class WindCell < PM::TableViewCell
     rmq.stylesheet = CellStylesheet
 
     @altitude = rmq.append(UILabel)
+    @bearing = rmq.append(UILabel)
     @azimuth = rmq.append(UIImageView)
 
     self
@@ -14,10 +15,11 @@ class WindCell < PM::TableViewCell
 
   # Apply the styles once the cell is at the proper height
   def layoutSubviews
-    super # Remove this call to not draw the title and subtitle elements.
+    # super # Remove this call to not draw the title and subtitle elements.
 
     @altitude.apply_style(:altitude)
     @azimuth.apply_style(:azimuth)
+    @bearing.apply_style(:bearing)
   end
 
   def altitude= a
@@ -29,12 +31,18 @@ class WindCell < PM::TableViewCell
   end
 
   def bearing= b
-    # TODO: Make this Ease Out Elastic animation.
-    UIView.animateWithDuration(2,
-      delay: 0.2,
-      options: UIViewAnimationOptionCurveEaseOut,
+    b = 0 if b.nil?
+
+    @bearing.get.text = b.to_s
+
+    UIView.animateWithDuration(2.0,
+      delay:1.0,
+      usingSpringWithDamping:0.3,
+      initialSpringVelocity:0.2,
+      options:UIViewAnimationOptionCurveLinear,
       animations: lambda {
-        @azimuth.get.transform = CGAffineTransformMakeRotation(b.to_i * Math::PI / 180);
+        radians = CGAffineTransformMakeRotation(b.to_i * Math::PI / 180);
+        @azimuth.get.transform = radians
       },
       completion:lambda {|finished|
       }

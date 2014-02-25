@@ -1,5 +1,6 @@
 class WindsScreen < PM::TableScreen
   title "Winds Aloft"
+  refreshable
 
   def on_load
     rmq.stylesheet = WindsStylesheet
@@ -49,6 +50,7 @@ class WindsScreen < PM::TableScreen
 
     Winds.client.at_station(App::Persistence['station']) do |w|
       @winds = w.last
+      end_refreshing
       update_table_data
     end
   end
@@ -60,8 +62,8 @@ class WindsScreen < PM::TableScreen
   def cell(index, key)
     data = @winds[key.to_s]
     {
-      title: "#{number_with_delimiter(key)} feet",
-      subtitle: "#{data['speed']} knots, bearing #{data['bearing']} degrees. (#{data['temp']}°C)",
+      # title: "#{number_with_delimiter(key)} feet",
+      # subtitle: "#{data['speed']} knots, bearing #{data['bearing']} degrees. (#{data['temp']}°C)",
       background_color: cell_background_color(index),
       height: cell_height,
       editing_style: :none,
@@ -78,6 +80,8 @@ class WindsScreen < PM::TableScreen
     {
       title: "This is a test",
       height: info_cell_height,
+      editing_style: :none,
+      selection_style: UITableViewCellSelectionStyleNone,
     }
   end
 
