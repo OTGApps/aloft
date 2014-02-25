@@ -29,7 +29,6 @@ class WindsScreen < PM::TableScreen
   end
 
   def table_data
-    return [{cells:[]}] unless @winds
     [{
       cells: (wind_heights.enum_for(:each_with_index).map { |k, i| cell(i, k) }) << info_cell
     }]
@@ -56,24 +55,38 @@ class WindsScreen < PM::TableScreen
   end
 
   def wind_heights
-    @winds.keys.map(&:to_i).sort.reverse
+    %w(3 6 9 12 18 24 30 34 39).map{ |h| h.to_i * 1000 }.reverse
   end
 
-  def cell(index, key)
-    data = @winds[key.to_s]
+  def base_cell
     {
-      # title: "#{number_with_delimiter(key)} feet",
-      # subtitle: "#{data['speed']} knots, bearing #{data['bearing']} degrees. (#{data['temp']}°C)",
-      background_color: cell_background_color(index),
       height: cell_height,
       editing_style: :none,
       selection_style: UITableViewCellSelectionStyleNone,
       cell_class: WindCell,
-
-      altitude: "#{number_with_delimiter(key)}ft",
       azimuth: azimuth_image,
-      bearing: data['bearing'],
+      bearing: nil,
+      # speed: nil,
+      # temp: nil
     }
+  end
+
+  def cell(index, key)
+    unless @winds.nil?
+      data = @winds[key.to_s]
+      base_cell.merge({
+        background_color: cell_background_color(index),
+        altitude: "#{number_with_delimiter(key)}ft",
+        bearing: data['bearing'],
+        # speed: "#{data['speed']} knots",
+        # temperature: "#{data['temp']}°C"
+      })
+    else
+      base_cell.merge({
+        background_color: cell_background_color(index),
+        altitude: "#{number_with_delimiter(key)}ft",
+      })
+    end
   end
 
   def info_cell
