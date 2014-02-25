@@ -16,7 +16,7 @@ GIT
 PATH
   remote: ../rmq/
   specs:
-    ruby_motion_query (0.5.3)
+    ruby_motion_query (0.5.5)
 
 GEM
   remote: https://rubygems.org/

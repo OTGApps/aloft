@@ -23,7 +23,6 @@ Motion::Project::App.setup do |app|
   app.info_plist['APP_STORE_ID'] = 823834093
 
   app.pods do
-    pod 'MTAnimation'
     pod 'FlurrySDK'
     pod 'Appirater'
     pod 'Harpy'
