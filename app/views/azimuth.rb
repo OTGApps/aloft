@@ -42,5 +42,4 @@ class Azimuth < UIImageView
       }
     )
   end
-
 end

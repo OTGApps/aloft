@@ -42,7 +42,7 @@ class WindsScreen < PM::TableScreen
   def on_refresh ; get_winds ; end
 
   def cell_height
-    @cell_h ||= (table_view.size.height - info_cell_height) / wind_heights.count
+    @cell_h ||= table_view.size.height / wind_heights.count
   end
 
   def cell_background_color(index)
@@ -98,8 +98,8 @@ class WindsScreen < PM::TableScreen
   def info_cell
     {
       title: "This is a test",
-      height: info_cell_height,
       editing_style: :none,
+      height: 50,
       selection_style: UITableViewCellSelectionStyleNone,
     }
   end
@@ -123,10 +123,6 @@ class WindsScreen < PM::TableScreen
     else
       s.mph
     end
-  end
-
-  def info_cell_height
-    10
   end
 
   def azimuth_image

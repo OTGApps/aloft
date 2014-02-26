@@ -10,6 +10,7 @@ class WindsStylesheet < ApplicationStylesheet
 
   def winds_table(st)
     st.separator_style = :none
+    st.content_inset = UIEdgeInsetsMake(0, 0, -50, 0)
   end
 
 end
