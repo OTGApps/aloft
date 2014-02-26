@@ -1,7 +1,7 @@
 class Azimuth < UIImageView
   def observe_location
-    App.notification_center.observe 'BearingUpdate' do |notification|
-      @phone_bearing = notification.object
+    App.notification_center.observe 'HeadingUpdate' do |notification|
+      @phone_heading = notification.object
       animate_to_bearing
     end
   end

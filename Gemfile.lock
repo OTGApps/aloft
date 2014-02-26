@@ -7,16 +7,10 @@ GIT
       methadone
       motion-require (>= 0.0.6)
 
-GIT
-  remote: git://github.com/rubymotion/BubbleWrap.git
-  revision: 2cfa97d5dffd7a36c620a2487c9ffddd53edc5a4
+PATH
+  remote: ../BubbleWrap
   specs:
     bubble-wrap (1.5.0.rc1)
-
-PATH
-  remote: ../rmq/
-  specs:
-    ruby_motion_query (0.5.5)
 
 GEM
   remote: https://rubygems.org/
@@ -62,6 +56,7 @@ GEM
     nap (0.6.0)
     open4 (1.3.2)
     rake (10.1.1)
+    ruby_motion_query (0.5.5)
     xcodeproj (0.14.1)
       activesupport (~> 3.0)
       colored (~> 1.2)
@@ -76,4 +71,4 @@ DEPENDENCIES
   awesome_print_motion
   bubble-wrap!
   motion-cocoapods
-  ruby_motion_query!
+  ruby_motion_query

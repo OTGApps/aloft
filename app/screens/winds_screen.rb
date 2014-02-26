@@ -18,10 +18,13 @@ class WindsScreen < PM::TableScreen
 
   def on_appear
     open_stations(false, false)
-    setTitle('Winds Aloft', subtitle:"at #{App::Persistence['station']}")
+    setTitle('Winds Aloft', subtitle:"at #{App::Persistence['station']}") if App::Persistence['station']
     get_winds
 
-    start_updating_bearing
+    BW::Location.get_compass do |heading|
+      App.notification_center.post('HeadingUpdate', heading[:magnetic_heading])
+    end
+
   end
 
   def open_stations(animated = true, force = true)
