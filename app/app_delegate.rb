@@ -18,18 +18,13 @@ class AppDelegate < ProMotion::Delegate
   def setup
     BW.debug = true unless App.info_plist['AppStoreRelease'] == true
 
-    if defined? TestFlight
-      TestFlight.setDeviceIdentifier UIDevice.currentDevice.uniqueIdentifier
-      TestFlight.takeOff "e9a2e874-1b13-426c-ad0f-6958e7b2889c"
-    end
-
     # 3rd Party integrations
-    unless Device.simulator?
+    if !Device.simulator? || !BW.debug?
       app_id = App.info_plist['APP_STORE_ID']
 
       # Flurry
       NSSetUncaughtExceptionHandler("uncaughtExceptionHandler")
-      Flurry.startSession("YSNRBSKM9B3ZZXPG7CG7")
+      Flurry.startSession("2ST55ZW4W4RT2X8X6WWQ")
 
       # Appirater
       Appirater.setAppId app_id

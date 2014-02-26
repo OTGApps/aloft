@@ -26,7 +26,6 @@ Motion::Project::App.setup do |app|
     pod 'FlurrySDK'
     pod 'Appirater'
     pod 'Harpy'
-    pod 'TestFlightSDK'
   end
 
   app.development do
