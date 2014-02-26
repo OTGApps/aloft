@@ -60,6 +60,7 @@ class WindsScreen < PM::TableScreen
 
   def base_cell
     {
+      action: :toggle_metric,
       height: cell_height,
       editing_style: :none,
       selection_style: UITableViewCellSelectionStyleNone,
@@ -98,11 +99,16 @@ class WindsScreen < PM::TableScreen
     }
   end
 
+  def toggle_metric
+    App::Persistence['metric'] = !App::Persistence['metric']
+    update_table_data
+  end
+
   def formatted_temp(t)
     if App::Persistence['metric'] == true
-      t.fahrenheit
-    else
       t.celcius
+    else
+      t.fahrenheit
     end
   end
 
@@ -119,7 +125,7 @@ class WindsScreen < PM::TableScreen
   end
 
   def azimuth_image
-    @ai ||= UIImage.imageNamed('arrow').imageWithRenderingMode(UIImageRenderingModeAlwaysTemplate)
+    @ai ||= UIImage.imageNamed('arrow')
   end
 
   def number_with_delimiter(number)
