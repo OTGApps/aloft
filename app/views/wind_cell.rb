@@ -10,7 +10,7 @@ class WindCell < PM::TableViewCell
     @bearing     = rmq.append(UILabel)
     @speed       = rmq.append(UILabel)
     @temperature = rmq.append(UILabel)
-    @azimuth     = rmq.append(UIImageView)
+    @azimuth     = rmq.append(Azimuth)
 
     self
   end
@@ -50,19 +50,10 @@ class WindCell < PM::TableViewCell
     end
 
     @bearing.get.text = "#{b}°"
-
-    @azimuth.get.hidden = false
-    UIView.animateWithDuration(2.0,
-      delay:0.3,
-      usingSpringWithDamping:0.3,
-      initialSpringVelocity:0.2,
-      options:UIViewAnimationOptionCurveLinear,
-      animations: lambda {
-        radians = CGAffineTransformMakeRotation(b.to_i * Math::PI / 180);
-        @azimuth.get.transform = radians
-      },
-      completion:lambda {|finished|
-      }
-    )
+    @azimuth.get.tap do |a|
+      a.hidden = false
+      a.bearing = b
+      a.observe_location
+    end
   end
 end
