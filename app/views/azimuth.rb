@@ -12,7 +12,7 @@ class Azimuth < UIImageView
   end
 
   def combined_bearing
-    (@bearing || 0) + (@phone_bearing || 0)
+    (@bearing || 0) - (@phone_heading || 0)
   end
 
   def animate_to_bearing(timing = 2.0)
