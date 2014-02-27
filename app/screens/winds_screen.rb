@@ -13,7 +13,7 @@ class WindsScreen < PM::TableScreen
     self.edgesForExtendedLayout = UIRectEdgeNone
 
     set_nav_bar_right_button UIImage.imageNamed('wind'), action: :open_stations
-    set_nav_bar_left_button UIImage.imageNamed('settings'), action: :open_stations
+    set_nav_bar_left_button UIImage.imageNamed('settings'), action: :open_about
   end
 
   def on_appear
@@ -31,6 +31,10 @@ class WindsScreen < PM::TableScreen
     if App::Persistence['station'].nil? || force
       open_modal StationsScreen.new(nav_bar: true), animated: animated
     end
+  end
+
+  def open_about
+    open_modal UINavigationController.alloc.initWithRootViewController(AboutScreen.alloc.init)
   end
 
   def table_data

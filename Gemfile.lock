@@ -7,6 +7,15 @@ GIT
       methadone
       motion-require (>= 0.0.6)
 
+GIT
+  remote: git://github.com/markrickert/formotion.git
+  revision: 3a62fd7eb69fa893c96b608b0e7c7f09f8db675a
+  branch: textables
+  specs:
+    formotion (1.7)
+      bubble-wrap (>= 1.4.0)
+      motion-require (~> 0.1.0)
+
 PATH
   remote: ../BubbleWrap
   specs:
@@ -46,7 +55,7 @@ GEM
       json_pure (~> 1.8)
       nap (~> 0.5)
     cocoapods-downloader (0.3.0)
-    cocoapods-try-release-fix (0.1.1)
+    cocoapods-try-release-fix (0.1.2)
     colored (1.2)
     escape (0.0.4)
     fuzzy_match (2.0.4)
@@ -74,5 +83,6 @@ DEPENDENCIES
   afmotion (~> 2.1.0)
   awesome_print_motion
   bubble-wrap!
+  formotion!
   motion-cocoapods
   ruby_motion_query!
