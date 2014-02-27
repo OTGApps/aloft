@@ -2,7 +2,7 @@ class Azimuth < UIImageView
   def observe_location
     App.notification_center.observe 'HeadingUpdate' do |notification|
       @phone_heading = notification.object
-      animate_to_bearing
+      animate_to_bearing(0)
     end
   end
 
@@ -28,8 +28,9 @@ class Azimuth < UIImageView
     )
   end
 
-  def spring_to_bearing
-    UIView.animateWithDuration(2.0,
+  # This animation is used only when the user doesn't want compass updates.
+  def spring_to_bearing(timing = 2.0)
+    UIView.animateWithDuration(timing,
       delay:0.3,
       usingSpringWithDamping:0.3,
       initialSpringVelocity:0.2,
