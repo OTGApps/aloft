@@ -5,7 +5,6 @@ class WindsStylesheet < ApplicationStylesheet
   end
 
   def root_view(st)
-    st.background_color = "#15adca".to_color
   end
 
   def winds_table(st)
