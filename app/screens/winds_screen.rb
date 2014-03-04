@@ -100,8 +100,11 @@ class WindsScreen < PM::TableScreen
   end
 
   def info_cell
+    data = @winds.nil? ? '' : @winds['raw']
     {
-      title: "This is a test",
+      title: 'Raw Data:',
+      cell_class: DataCell,
+      subtitle: data,
       editing_style: :none,
       height: 50,
       selection_style: UITableViewCellSelectionStyleNone,
