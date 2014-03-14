@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 gem "motion-cocoapods"
 
 # RubyMotion
-gem 'bubble-wrap', :path => '../BubbleWrap', :require => ['bubble-wrap/core', 'bubble-wrap/mail', 'bubble-wrap/location']
+gem 'bubble-wrap', :github => 'rubymotion/BubbleWrap', :require => ['bubble-wrap/core', 'bubble-wrap/mail', 'bubble-wrap/location']
 # gem 'bubble-wrap', :github => 'rubymotion/BubbleWrap', :require => ['bubble-wrap/core', 'bubble-wrap/location']
 gem 'ProMotion', :github => 'clearsightstudio/ProMotion', :branch => 'edge'
 gem 'afmotion', '~> 2.1.0'
