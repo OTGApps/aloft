@@ -37,6 +37,9 @@ class AppDelegate < ProMotion::Delegate
       Harpy.sharedInstance.setAppID app_id
       Harpy.sharedInstance.checkVersion
     end
+
+    App::Persistence['compass'] ||= true
+    App::Persistence['metric']  ||= false
   end
 
   def appearance
