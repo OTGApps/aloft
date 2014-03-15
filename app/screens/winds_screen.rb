@@ -12,7 +12,7 @@ class WindsScreen < PM::TableScreen
     self.automaticallyAdjustsScrollViewInsets = false
     self.edgesForExtendedLayout = UIRectEdgeNone
 
-    set_nav_bar_right_button UIImage.imageNamed('wind'), action: :open_stations
+    set_nav_bar_right_button UIImage.imageNamed('flag'), action: :open_stations
     set_nav_bar_left_button UIImage.imageNamed('settings'), action: :open_about
   end
 
