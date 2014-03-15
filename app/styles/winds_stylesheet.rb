@@ -90,9 +90,7 @@ class WindsStylesheet < ApplicationStylesheet
   end
 
   def wind_data(st)
-    ap 'setting wind data style on:'
-    ap st
-    ap st.text
     st.font = font.itty_bitty
+    st.adjusts_font_size = true
   end
 end
