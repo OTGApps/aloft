@@ -26,17 +26,21 @@ class Stations
     coordinate = CLLocation.alloc.initWithLatitude(coordinate[:lat], longitude:coordinate[:lon]) unless coordinate.is_a?(CLLocation)
 
     all do |json, error|
-      # AFNetworking initialised the hash as immutable. Fix that.
-      stations = json.map { |s| s.mutableCopy }
+      if error
+        block.call(error)
+      else
+        # AFNetworking initialised the hash as immutable. Fix that.
+        stations = json.map { |s| s.mutableCopy }
 
-      # Get their distnaces
-      stations.each do |station|
-        station_coord = CLLocation.alloc.initWithLatitude(station[:lat], longitude:station[:lon])
-        distance = coordinate.distanceFromLocation(station_coord)
-        station[:current_distance] = Distance.new(distance) # In Meters
+        # Get their distnaces
+        stations.each do |station|
+          station_coord = CLLocation.alloc.initWithLatitude(station[:lat], longitude:station[:lon])
+          distance = coordinate.distanceFromLocation(station_coord)
+          station[:current_distance] = Distance.new(distance) # In Meters
+        end
+
+        block.call(stations.sort_by { |station| station[:current_distance] })
       end
-
-      block.call(stations.sort_by { |station| station[:current_distance] })
     end
   end
 end

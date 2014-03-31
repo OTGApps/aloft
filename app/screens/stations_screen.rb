@@ -1,5 +1,6 @@
 class StationsScreen < PM::TableScreen
   title "Weather Stations"
+  refreshable
 
   def on_load
     rmq.stylesheet = StationsStylesheet
@@ -17,6 +18,8 @@ class StationsScreen < PM::TableScreen
     }]
   end
 
+  def on_refresh ; refresh ; end
+
   def refresh
     ap "refreshing" if BW.debug?
     BW::Location.get_once do |location|
@@ -27,19 +30,33 @@ class StationsScreen < PM::TableScreen
 
   def find_stations(location)
     ap "Finding stations" if BW.debug?
+
+    end_refreshing
     Stations.client.sorted_by_distance_from(location) do |s|
 
-      @stations = s.map do |station|
-        {
-          title: station[:name],
-          subtitle: subtitle(station),
-          action: :select_station,
-          height: 60,
-          arguments: { station: station }
-        }
+      if s.is_a?(NSError)
+        ap "Got an error from the stations API" if BW.debug?
+
+        App.alert("Error retrieving stations", {
+          message: "There was an error retrieving the list of weather stations.\n\nPlease try again or email mark@mohawkapps.com for support."
+        })
+      else
+        map_and_show_stations(s)
       end
-      update_table_data
     end
+  end
+
+  def map_and_show_stations(data)
+    @stations = data.map do |station|
+      {
+        title: station[:name],
+        subtitle: subtitle(station),
+        action: :select_station,
+        height: 60,
+        arguments: { station: station }
+      }
+    end
+    update_table_data
   end
 
   def subtitle(station)
