@@ -85,6 +85,20 @@ class WindsStylesheet < ApplicationStylesheet
     st.background_color = UIColor.magentaColor if debug?
   end
 
+  def light_variable(st)
+    width = (PADDING * 8) + azimuth_size(st) + LABEL_WIDTH
+    st.frame = {
+      l: PADDING,
+      t: PADDING,
+      w: width,
+      h: st.super_height - (2 * PADDING)
+    }
+    st.font = font.small
+    st.text_alignment = :center
+
+    st.background_color = UIColor.colorWithWhite(0.5, alpha:0.5) if debug?
+  end
+
   def azimuth_size(st)
     st.super_height - (2 * PADDING) - BEARING_HEIGHT
   end

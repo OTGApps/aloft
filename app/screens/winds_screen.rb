@@ -102,7 +102,8 @@ class WindsScreen < PM::TableScreen
         altitude: "#{number_with_delimiter(key)}ft",
         bearing: data['bearing'],
         speed: formatted_speed(data['speed']),
-        temperature: formatted_temp(data['temp'])
+        temperature: formatted_temp(data['temp']),
+        light_variable: data['bearing'].nil? && data['speed'].nil?
       })
     else
       base_cell.merge({

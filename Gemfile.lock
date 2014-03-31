@@ -50,7 +50,7 @@ GEM
       fuzzy_match (~> 2.0.4)
       json_pure (~> 1.8)
       nap (~> 0.5)
-    cocoapods-downloader (0.4.0)
+    cocoapods-downloader (0.4.1)
     cocoapods-try (0.2.0)
     colored (1.2)
     escape (0.0.4)

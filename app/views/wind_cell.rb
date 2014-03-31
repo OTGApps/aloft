@@ -4,11 +4,12 @@ class WindCell < PM::TableViewCell
   # This method is used by ProMotion to instantiate cells.
   def initWithStyle(style_name, reuseIdentifier: reuseIdentifier)
     super
-    @altitude    = rmq.append(UILabel)
-    @bearing     = rmq.append(UILabel)
-    @speed       = rmq.append(UILabel)
-    @temperature = rmq.append(UILabel)
-    @azimuth     = rmq.append(Azimuth)
+    @altitude       = rmq.append(UILabel)
+    @bearing        = rmq.append(UILabel)
+    @speed          = rmq.append(UILabel)
+    @temperature    = rmq.append(UILabel)
+    @azimuth        = rmq.append(Azimuth)
+    @light_variable = rmq.append(UILabel)
     self
   end
 
@@ -21,6 +22,7 @@ class WindCell < PM::TableViewCell
     @bearing.apply_style(:bearing)
     @speed.apply_style(:speed)
     @temperature.apply_style(:temperature)
+    @light_variable.apply_style(:light_variable)
   end
 
   def altitude= a
@@ -37,6 +39,10 @@ class WindCell < PM::TableViewCell
 
   def azimuth= i
     @azimuth.get.image = i
+  end
+
+  def light_variable= tf
+    @light_variable.get.text = tf ? 'Light & Variable' : ''
   end
 
   def bearing= b
