@@ -38,8 +38,8 @@ class AppDelegate < ProMotion::Delegate
       Harpy.sharedInstance.checkVersion
     end
 
-    App::Persistence['compass'] ||= true
-    App::Persistence['metric']  ||= false
+    App::Persistence['compass'] = true if App::Persistence['compass'].nil?
+    App::Persistence['metric']  = false if App::Persistence['metric'].nil?
   end
 
   def appearance
