@@ -3,11 +3,11 @@ $:.unshift("/Library/RubyMotion/lib")
 require 'motion/project/template/ios'
 
 begin
+  require 'rubygems'
   require 'bundler'
   Bundler.require
 rescue LoadError
 end
-require 'afmotion'
 
 Motion::Project::App.setup do |app|
   # Use `rake config' to see complete project settings.
