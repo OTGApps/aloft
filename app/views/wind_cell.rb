@@ -34,7 +34,7 @@ class WindCell < PM::TableViewCell
   end
 
   def temperature= t
-    @temperature.get.text = t
+    @temperature.get.text = (t == '') ? '--' : t
   end
 
   def azimuth= i
