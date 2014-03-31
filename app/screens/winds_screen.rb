@@ -19,12 +19,25 @@ class WindsScreen < PM::TableScreen
   def on_appear
     open_stations(false, false)
     setTitle('Winds Aloft', subtitle:"at #{App::Persistence['station']}") if App::Persistence['station']
+
     get_winds
+    init_compass
+  end
+
+  def init_compass
+    if !BW::Location.enabled? || App::Persistence['compass'] == false
+      stop_compass
+      App.notification_center.post('StopHeadingUpdates', nil)
+      return
+    end
 
     BW::Location.get_compass do |heading|
       App.notification_center.post('HeadingUpdate', heading[:magnetic_heading])
     end
+  end
 
+  def stop_compass
+    BW::Location.stop
   end
 
   def open_stations(animated = true, force = true)
@@ -138,23 +151,6 @@ class WindsScreen < PM::TableScreen
 
   def number_with_delimiter(number)
     number.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse
-  end
-
-  def start_updating_bearing
-    @locationManager = CLLocationManager.alloc.init
-    @locationManager.delegate = self
-    @locationManager.desiredAccuracy = KCLLocationAccuracyBest
-    @locationManager.distanceFilter = KCLDistanceFilterNone
-    @locationManager.startUpdatingHeading
-  end
-
-  def stop_updating_bearing
-    @locationManager.stopUpdatingHeading unless @locationManager.nil?
-  end
-
-  # Core location
-  def locationManager(manager, didUpdateHeading:newHeading)
-    App.notification_center.post('BearingUpdate', newHeading.magneticHeading)
   end
 
 end

@@ -4,6 +4,11 @@ class Azimuth < UIImageView
       @phone_heading = notification.object
       animate_to_bearing(0)
     end
+
+    App.notification_center.observe 'StopHeadingUpdates' do |notification|
+      puts 'Stopping heading updates.'
+      spring_to_bearing
+    end
   end
 
   def bearing=(b)
