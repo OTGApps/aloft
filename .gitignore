@@ -18,3 +18,5 @@ vendor/Pods
 vendor/Podfile.lock
 
 /provisioning/
+
+/_release/
