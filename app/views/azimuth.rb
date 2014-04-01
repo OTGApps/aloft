@@ -16,7 +16,10 @@ class Azimuth < UIImageView
   def bearing=(b)
     @original_bearing ||= b
     @bearing = b
-    animate_to_bearing
+
+    @initial_animation ||= begin
+      animate_to_bearing
+    end
   end
 
   def combined_bearing
