@@ -2,6 +2,9 @@ class StationsScreen < PM::TableScreen
   title "Weather Stations"
   refreshable
 
+  def on_refresh ; refresh ; end
+  def on_appear ; refresh ; end
+
   def on_load
     rmq.stylesheet = StationsStylesheet
     view.rmq.apply_style :root_view
@@ -17,18 +20,12 @@ class StationsScreen < PM::TableScreen
     end
   end
 
-  def on_appear
-    refresh
-  end
-
   def table_data
     [{
       title: "Select weather station near you:",
       cells: @stations
     }]
   end
-
-  def on_refresh ; refresh ; end
 
   def refresh
     ap "refreshing" if BW.debug?
