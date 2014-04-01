@@ -118,7 +118,7 @@ class AboutScreen < Formotion::FormController
   def viewDidLoad
     super
     self.title = 'Settings'
-    self.navigationItem.rightBarButtonItem = UIBarButtonItem.alloc.initWithBarButtonSystemItem(UIBarButtonSystemItemStop, target:self, action:"close")
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem.alloc.initWithBarButtonSystemItem(UIBarButtonSystemItemStop, target:self, action:'close')
     observe_switces
   end
 

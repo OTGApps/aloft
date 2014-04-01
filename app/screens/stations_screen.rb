@@ -7,7 +7,17 @@ class StationsScreen < PM::TableScreen
     view.rmq.apply_style :root_view
 
     @stations = []
-    set_nav_bar_button(:left, title: "Close", action: :close) unless App::Persistence['station'].nil?
+    unless App::Persistence['station'].nil?
+      set_nav_bar_button(
+        :right,
+        title: 'Close',
+        system_item: :stop,
+        action: :close
+      )
+    end
+  end
+
+  def on_appear
     refresh
   end
 
@@ -22,10 +32,25 @@ class StationsScreen < PM::TableScreen
 
   def refresh
     ap "refreshing" if BW.debug?
+
+    return alert_location_services_off unless BW::Location.enabled?
+
     BW::Location.get_once do |location|
-      ap "got location." if BW.debug?
-      find_stations(location)
+      if location.is_a?(CLLocation)
+        ap location
+        ap "got location." if BW.debug?
+        find_stations(location)
+      else
+        alert_location_services_off
+      end
     end
+  end
+
+  def alert_location_services_off
+    end_refreshing
+    App.alert("Location Services\nAre Disabled", {
+      message: "Please enable location services for #{App.name} in the settings app and try again."
+    })
   end
 
   def find_stations(location)
