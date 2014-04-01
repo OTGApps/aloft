@@ -106,7 +106,7 @@ class AboutScreen < Formotion::FormController
           type: :text,
           row_height: 60,
           font: { name: 'HelveticaNeue', size: 12 },
-          placeholder: 'Use of the NOAA logo does not imply endorsement of this app.',
+          placeholder: 'Logo used with permission. Use of the NOAA logo does not imply endorsement of this app.',
           enabled: false,
           selection_style: :none
         }]
