@@ -22,6 +22,10 @@ Motion::Project::App.setup do |app|
   app.icons = Dir.glob("resources/Icon*.png").map{|icon| icon.split("/").last}
   app.prerendered_icon = true
   app.info_plist['APP_STORE_ID'] = 823834093
+  app.info_plist['UIRequiredDeviceCapabilities'] = {
+    'location-services' => true,
+    'magnetometer' => true
+  }
   app.entitlements['keychain-access-groups'] = [
     app.seed_id + '.' + app.identifier
   ]
