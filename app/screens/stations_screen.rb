@@ -31,8 +31,8 @@ class StationsScreen < PM::TableScreen
   def find_stations(location)
     ap "Finding stations" if BW.debug?
 
-    end_refreshing
     Stations.client.sorted_by_distance_from(location) do |s|
+      end_refreshing
 
       if s.is_a?(NSError)
         ap "Got an error from the stations API" if BW.debug?

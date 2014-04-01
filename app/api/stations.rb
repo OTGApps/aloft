@@ -7,18 +7,16 @@ class Stations
   end
 
   def all(&block)
-    return block.call(@json, @error) if @json
-
     AFMotion::JSON.get(API_URL) do |result|
       json = nil
       error = nil
 
       if result.success?
-        @json ||= result.object
+        json ||= result.object
       else
-        @error ||= result.error
+        error ||= result.error
       end
-      block.call @json, @error
+      block.call(json, error)
     end
   end
 

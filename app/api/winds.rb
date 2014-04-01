@@ -7,8 +7,6 @@ class Winds
   end
 
   def all(&block)
-    # return block.call(@json, @error) if @json
-
     AFMotion::JSON.get(API_URL) do |result|
       json = nil
       error = nil
@@ -18,7 +16,7 @@ class Winds
       else
         @error ||= result.error
       end
-      block.call @json, @error
+      block.call(@json, @error)
     end
   end
 
