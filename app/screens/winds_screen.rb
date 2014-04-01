@@ -18,10 +18,12 @@ class WindsScreen < PM::TableScreen
 
   def on_appear
     open_stations(false, false)
-    setTitle('Winds Aloft', subtitle:"at #{App::Persistence['station']}") if App::Persistence['station']
 
-    get_winds
-    init_compass
+    if App::Persistence['station']
+      setTitle('Winds Aloft', subtitle:"at #{App::Persistence['station']}")
+      get_winds
+      init_compass
+    end
   end
 
   def init_compass
@@ -140,6 +142,10 @@ class WindsScreen < PM::TableScreen
 
   def toggle_metric
     App::Persistence['metric'] = !App::Persistence['metric']
+
+    flurry_params = {on_off: App::Persistence['metric']}
+    Flurry.logEvent("METRIC_SWITCH", withParameters:flurry_params) unless Device.simulator?
+
     update_table_data
   end
 
