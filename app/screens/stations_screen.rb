@@ -29,6 +29,7 @@ class StationsScreen < PM::TableScreen
 
   def refresh
     ap "refreshing" if BW.debug?
+    Flurry.logEvent("REFERSH_STATIONS") unless Device.simulator?
 
     return alert_location_services_off unless BW::Location.enabled?
 
@@ -44,6 +45,7 @@ class StationsScreen < PM::TableScreen
   end
 
   def alert_location_services_off
+    Flurry.logEvent("LOCATION_SERVICES_OFF") unless Device.simulator?
     end_refreshing
     App.alert("Location Services\nAre Disabled", {
       message: "Please enable location services for #{App.name} in the settings app and try again."
@@ -57,6 +59,7 @@ class StationsScreen < PM::TableScreen
       end_refreshing
 
       if s.is_a?(NSError)
+        Flurry.logEvent("STATIONS_API_ERROR") unless Device.simulator?
         ap "Got an error from the stations API" if BW.debug?
 
         App.alert("Error retrieving stations", {
@@ -89,11 +92,14 @@ class StationsScreen < PM::TableScreen
 
   def select_station(args = {})
     App::Persistence['station'] = args[:station][:code]
+
+    flurry_params = {station: args[:station][:code]}
+    Flurry.logEvent("SELECTED_STATION", withParameters:flurry_params) unless Device.simulator?
+
     close
   end
 
   def close
     dismissModalViewControllerAnimated(true)
   end
-
 end

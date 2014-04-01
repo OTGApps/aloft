@@ -112,6 +112,7 @@ class AboutScreen < Formotion::FormController
         }]
       }]
     })
+    Flurry.logEvent("VIEWED_ABOUT") unless Device.simulator?
     super.initWithForm(@form)
   end
 
@@ -140,9 +141,14 @@ class AboutScreen < Formotion::FormController
     compass = @form.sections[0].rows[1]
 
     observe(metric, 'value') do |old_value, new_value|
+      flurry_params = {on_off: new_value}
+      Flurry.logEvent("METRIC_SWITCH", withParameters:flurry_params) unless Device.simulator?
       App::Persistence['metric'] = new_value
     end
+
     observe(compass, 'value') do |old_value, new_value|
+      flurry_params = {on_off: new_value}
+      Flurry.logEvent("COMPASS_SWITCH", withParameters:flurry_params) unless Device.simulator?
       App::Persistence['compass'] = new_value
     end
   end
