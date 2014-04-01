@@ -12,8 +12,8 @@ class WindsScreen < PM::TableScreen
     self.automaticallyAdjustsScrollViewInsets = false
     self.edgesForExtendedLayout = UIRectEdgeNone
 
-    set_nav_bar_right_button UIImage.imageNamed('flag'), action: :open_stations
-    set_nav_bar_left_button UIImage.imageNamed('settings'), action: :open_about
+    set_nav_bar_right_button 'flag'.uiimage, action: :open_stations
+    set_nav_bar_left_button 'settings'.uiimage, action: :open_about
   end
 
   def on_appear
@@ -156,7 +156,7 @@ class WindsScreen < PM::TableScreen
   end
 
   def azimuth_image
-    @ai ||= UIImage.imageNamed('arrow')
+    @ai ||= 'arrow'.uiimage
   end
 
   def number_with_delimiter(number)
