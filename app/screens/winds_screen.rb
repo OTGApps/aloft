@@ -70,9 +70,18 @@ class WindsScreen < PM::TableScreen
     return unless App::Persistence['station']
 
     Winds.client.at_station(App::Persistence['station']) do |w|
-      @winds = w.last
       end_refreshing
-      update_table_data
+
+      if w.is_a?(NSError)
+        ap "Got an error from the winds API" if BW.debug?
+
+        App.alert("Error retrieving winds aloft", {
+          message: "There was an error retrieving the winds aloft forecasts.\n\nPlease try again or email mark@mohawkapps.com\nfor support."
+        })
+      else
+        @winds = w.last
+        update_table_data
+      end
     end
   end
 

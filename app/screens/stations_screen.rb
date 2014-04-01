@@ -38,7 +38,7 @@ class StationsScreen < PM::TableScreen
         ap "Got an error from the stations API" if BW.debug?
 
         App.alert("Error retrieving stations", {
-          message: "There was an error retrieving the list of weather stations.\n\nPlease try again or email mark@mohawkapps.com for support."
+          message: "There was an error retrieving the list of weather stations.\n\nPlease try again or email mark@mohawkapps.com\nfor support."
         })
       else
         map_and_show_stations(s)

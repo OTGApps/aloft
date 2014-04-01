@@ -24,7 +24,11 @@ class Winds
 
   def at_station(station, &block)
     all do |json, error|
-      block.call(json['winds'].find { |k,v| k.downcase == station.downcase })
+      if error
+        block.call(error)
+      else
+        block.call(json['winds'].find { |k,v| k.downcase == station.downcase })
+      end
     end
   end
 end
