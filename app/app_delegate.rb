@@ -1,25 +1,22 @@
 class AppDelegate < ProMotion::Delegate
-
   tint_color UIColor.whiteColor
-
   attr_accessor :main_screen
 
   def on_load(app, options)
-    # BubbleWrap.usere_weak_callbacks = true
-
     setup
+    defaults
     appearance
 
     self.main_screen = WindsScreen.new(nav_bar: true)
     open self.main_screen
-    true
   end
 
   def setup
     BW.debug = true unless App.info_plist['AppStoreRelease'] == true
 
     # 3rd Party integrations
-    if !Device.simulator? || !BW.debug?
+    # Only do this on the device
+    if !Device.simulator?
       app_id = App.info_plist['APP_STORE_ID']
 
       # Flurry
@@ -30,14 +27,16 @@ class AppDelegate < ProMotion::Delegate
       Appirater.setAppId app_id
       Appirater.setDaysUntilPrompt 5
       Appirater.setUsesUntilPrompt 10
-      Appirater.setTimeBeforeReminding 5
+      Appirater.setTimeBeforeReminding 10
       Appirater.appLaunched true
 
       # Harpy
       Harpy.sharedInstance.setAppID app_id
       Harpy.sharedInstance.checkVersion
     end
+  end
 
+  def defaults
     App::Persistence['compass'] = true if App::Persistence['compass'].nil?
     App::Persistence['metric']  = false if App::Persistence['metric'].nil?
   end
@@ -48,8 +47,6 @@ class AppDelegate < ProMotion::Delegate
     nav_bar.setBarTintColor "#15adca".to_color
     nav_bar.setTintColor UIColor.whiteColor
     nav_bar.setTitleTextAttributes({
-    #   UITextAttributeFont => UIFont.fontWithName('Trebuchet MS', size:24),
-      # UITextAttributeTextShadowColor => UIColor.colorWithWhite(0.0, alpha:0.4),
       UITextAttributeTextColor => UIColor.whiteColor
     })
   end
@@ -62,5 +59,4 @@ class AppDelegate < ProMotion::Delegate
   def will_enter_foreground
     Appirater.appEnteredForeground true unless Device.simulator?
   end
-
 end

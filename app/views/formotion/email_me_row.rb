@@ -1,7 +1,6 @@
 module Formotion
   module RowType
     class EmailMeRow < ObjectRow
-
       def after_build(cell)
         super
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator
