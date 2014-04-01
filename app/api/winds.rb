@@ -25,7 +25,11 @@ class Winds
       if error
         block.call(error)
       else
-        block.call(json['winds'].find { |k,v| k.downcase == station.downcase })
+        block.call(
+          [json['data']].concat(
+            json['winds'].find { |k,v| k.downcase == station.downcase }
+          )
+        )
       end
     end
   end

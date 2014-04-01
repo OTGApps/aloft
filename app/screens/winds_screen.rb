@@ -80,6 +80,7 @@ class WindsScreen < PM::TableScreen
         })
       else
         @winds = w.last
+        @data = w.first
         update_table_data
       end
     end
@@ -124,8 +125,10 @@ class WindsScreen < PM::TableScreen
 
   def info_cell
     data = @winds.nil? ? '' : @winds['raw']
+    expiry = @data.nil? ? '' : @data['use'][/[0-9]{3,4}-[0-9]{3,4}Z/]
+
     {
-      title: 'Raw Data:',
+      title: "Raw data for use #{expiry}",
       cell_class: DataCell,
       subtitle: data,
       editing_style: :none,
