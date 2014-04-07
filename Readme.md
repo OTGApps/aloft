@@ -1,5 +1,5 @@
 # aloft [![Code Climate](https://codeclimate.com/github/MohawkApps/aloft.png)](https://codeclimate.com/github/MohawkApps/aloft)
-![App Icon](https://raw.github.com/MohawkApps/aloft/master/resources/Icon-120.png)
+![App Icon](resources/Icon-120.png)
 
 #### A [RubyMotion](http://www.rubymotion.com/) application brought to you by [Mohawk Apps](http://www.mohawkapps.com/).
 
@@ -37,7 +37,7 @@ Icon by the talented [Mel Shields](http://dribbble.com/shieldsma91).
 
 ## Screenshots
 
-<a href="https://raw.github.com/MohawkApps/aloft/master/_marketing/screenshots/1.0.0/iPhone4/1.png"><img src="https://raw.github.com/MohawkApps/aloft/master/_marketing/screenshots/1.0.0/iPhone4/1.png" alt="Screenshot" width="140" /></a> <a href="https://raw.github.com/MohawkApps/aloft/master/_marketing/screenshots/1.0.0/iPhone4/2.png"><img src="https://raw.github.com/MohawkApps/aloft/master/_marketing/screenshots/1.0.0/iPhone4/2.png" alt="Screenshot" width="140" /></a> <a href="https://raw.github.com/MohawkApps/aloft/master/_marketing/screenshots/1.0.0/iPhone4/3.png"><img src="https://raw.github.com/MohawkApps/aloft/master/_marketing/screenshots/1.0.0/iPhone4/3.png" alt="Screenshot" width="140" /></a> <a href="https://raw.github.com/MohawkApps/aloft/master/_marketing/screenshots/1.0.0/iPhone4/4.png"><img src="https://raw.github.com/MohawkApps/aloft/master/_marketing/screenshots/1.0.0/iPhone4/4.png" alt="Screenshot" width="140"  /></a>
+<a href="_marketing/screenshots/1.0.0/iPhone4/1.png"><img src="_marketing/screenshots/1.0.0/iPhone4/1.png" alt="Screenshot" width="140" /></a> <a href="_marketing/screenshots/1.0.0/iPhone4/2.png"><img src="_marketing/screenshots/1.0.0/iPhone4/2.png" alt="Screenshot" width="140" /></a> <a href="_marketing/screenshots/1.0.0/iPhone4/3.png"><img src="_marketing/screenshots/1.0.0/iPhone4/3.png" alt="Screenshot" width="140" /></a> <a href="_marketing/screenshots/1.0.0/iPhone4/4.png"><img src="_marketing/screenshots/1.0.0/iPhone4/4.png" alt="Screenshot" width="140"  /></a>
 
 ## Contributing:
 
