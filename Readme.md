@@ -21,6 +21,10 @@ For the curious, "760253" means: Winds at 102 knots bearing 260 degrees at 53°C
 
 This app is open source. Browse the source code here: https://github.com/MohawkApps/aloft/
 
+## Download from the App Store
+
+[![image](http://ax.phobos.apple.com.edgesuite.net/images/web/linkmaker/badge_appstore-lrg.gif)](https://itunes.apple.com/us/app/aloft-winds-aloft-forecast/id823834093?mt=8&uo=4&at=10l4yY&ct=github)
+
 ## Icon
 
 Icon by the talented [Mel Shields](http://dribbble.com/shieldsma91).
