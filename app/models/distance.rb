@@ -9,6 +9,10 @@ class Distance
     @meters * 0.000621371192
   end
 
+  def kilometers
+    @meters / 1000
+  end
+
   def <=> other
     @meters <=> other.meters
   end

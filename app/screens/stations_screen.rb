@@ -86,9 +86,16 @@ class StationsScreen < PM::TableScreen
   end
 
   def subtitle(station)
-    miles = station[:current_distance].miles.round
+    if App::Persistence['metric'] == true
+      distance = station[:current_distance].kilometers.round
+      distance_word = 'km'
+    else
+      distance = station[:current_distance].miles.round
+      distance_word = ' miles'
+    end
+
     state = station[:state_abbrev]
-    "About #{miles} miles away. #{station[:city]}, #{state}"
+    "About #{distance}#{distance_word} away. #{station[:city]}, #{state}"
   end
 
   def select_station(args = {})
