@@ -1,6 +1,7 @@
 class StationsScreen < PM::TableScreen
   title "Weather Stations"
   refreshable
+  searchable
 
   def on_refresh ; refresh ; end
   def on_appear ; refresh ; end
@@ -75,6 +76,7 @@ class StationsScreen < PM::TableScreen
       {
         title: station[:name],
         subtitle: subtitle(station),
+        search_text: "#{station[:name]} #{station[:code]}",
         action: :select_station,
         height: 60,
         arguments: { station: station }
