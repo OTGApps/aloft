@@ -1,5 +1,6 @@
 class Winds
   API_URL = "http://winds-aloft.mohawkapps.com/winds"
+  # API_URL = "http://winds-aloft-dev.mohawkapps.com/winds"
 
   def self.client
     Dispatch.once { @instance ||= new }
