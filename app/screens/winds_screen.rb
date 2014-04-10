@@ -89,8 +89,13 @@ class WindsScreen < PM::TableScreen
     end
   end
 
+  # Gets the first 9 altitudes OR the default NOAA heights
   def wind_heights
-    %w(3 6 9 12 18 24 30 34 39).map{ |h| h.to_i * 1000 }.reverse
+    if @winds.nil?
+      %w(3 6 9 12 18 24 30 34 39).map{ |h| h.to_i * 1000 }.reverse
+    else
+      @winds.keys.map(&:to_i).reject { |a| a == 0 }.sort[0..8].reverse
+    end
   end
 
   def base_cell
