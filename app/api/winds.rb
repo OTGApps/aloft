@@ -13,11 +13,11 @@ class Winds
       error = nil
 
       if result.success?
-        @json ||= result.object
+        json ||= result.object
       else
-        @error ||= result.error
+        error ||= result.error
       end
-      block.call(@json, @error)
+      block.call(json, error)
     end
   end
 
