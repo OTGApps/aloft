@@ -32,41 +32,41 @@ class StationsScreen < PM::TableScreen
     ap "refreshing"
     Flurry.logEvent("REFRESH_STATIONS") unless Device.simulator?
 
-    return alert_location_services_off unless BW::Location.enabled?
-
     BW::Location.get_once do |location|
       if location.is_a?(CLLocation)
         ap "got location."
         find_stations(location)
       else
-        alert_location_services_off
+        find_stations
       end
     end
   end
 
-  def alert_location_services_off
-    end_refreshing
-    Flurry.logEvent("LOCATION_SERVICES_OFF") unless Device.simulator?
-    App.alert("Location Services\nAre Disabled", {
-      message: "Please enable location services for #{App.name} in the settings app and try again."
-    })
+  def found_stations(s)
+    if s.is_a?(NSError)
+      Flurry.logEvent("STATIONS_API_ERROR") unless Device.simulator?
+      ap "Got an error from the stations API"
+
+      App.alert("Error retrieving stations", {
+        message: "There was an error retrieving the list of weather stations.\n\nPlease try again in a minute."
+      })
+    else
+      map_and_show_stations(s)
+    end
   end
 
-  def find_stations(location)
-    ap "Finding stations" if BW.debug?
+  def find_stations(location=nil)
+    ap "Finding stations"
 
-    Stations.client.sorted_by_distance_from(location) do |s|
-      end_refreshing
-
-      if s.is_a?(NSError)
-        Flurry.logEvent("STATIONS_API_ERROR") unless Device.simulator?
-        ap "Got an error from the stations API" if BW.debug?
-
-        App.alert("Error retrieving stations", {
-          message: "There was an error retrieving the list of weather stations.\n\nPlease try again or email mark@mohawkapps.com\nfor support."
-        })
-      else
-        map_and_show_stations(s)
+    if location.nil?
+      Stations.client.sorted_alphabetically do |s|
+        end_refreshing
+        found_stations(s)
+      end
+    else
+      Stations.client.sorted_by_distance_from(location) do |s|
+        end_refreshing
+        found_stations(s)
       end
     end
   end
@@ -86,6 +86,10 @@ class StationsScreen < PM::TableScreen
   end
 
   def subtitle(station)
+    state = station[:state_abbrev]
+    city_state = "#{station[:city]}, #{state}"
+    return city_state if station[:current_distance].nil?
+
     if App::Persistence['metric'] == true
       distance = station[:current_distance].kilometers.round
       distance_word = 'km'
@@ -94,8 +98,7 @@ class StationsScreen < PM::TableScreen
       distance_word = ' miles'
     end
 
-    state = station[:state_abbrev]
-    "About #{distance}#{distance_word} away. #{station[:city]}, #{state}"
+    "About #{distance}#{distance_word} away. #{city_state}"
   end
 
   def select_station(args = {})

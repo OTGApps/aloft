@@ -42,4 +42,17 @@ class Stations
       end
     end
   end
+
+  def sorted_alphabetically(&block)
+    all do |json, error|
+      if error
+        block.call(error)
+      else
+        # AFNetworking initialised the hash as immutable. Fix that.
+        stations = json.map { |s| s.mutableCopy }
+        block.call(stations.sort_by { |station| station[:name] })
+      end
+    end
+  end
+
 end
