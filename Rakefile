@@ -17,8 +17,8 @@ Motion::Project::App.setup do |app|
   app.interface_orientations = [:portrait, :portrait_upside_down]
   app.identifier = 'com.mohawkapps.aloft'
   app.seed_id = 'DW9QQZR4ZL'
-  app.version = "2"
-  app.short_version = "1.0.1"
+  app.version = "3"
+  app.short_version = "1.0.2"
   app.icons = Dir.glob("resources/Icon*.png").map{|icon| icon.split("/").last}
   app.prerendered_icon = true
   app.info_plist['APP_STORE_ID'] = 823834093
@@ -37,6 +37,11 @@ Motion::Project::App.setup do |app|
   end
 
   app.development do
+    app.seed_id = '7N372VT8HB'
+    app.identifier = app.seed_id + '.' + app.identifier
+    app.entitlements['keychain-access-groups'] = [
+      app.seed_id + '.' + app.identifier
+    ]
     app.entitlements['get-task-allow'] = true
     app.codesign_certificate = "iPhone Developer: Mark Rickert (YA2VZGDX4S)"
     app.provisioning_profile = "../Provisioning/WildcardDevelopment.mobileprovision"
