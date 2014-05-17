@@ -11,4 +11,4 @@ gem 'ruby_motion_query'
 gem 'formotion', :github => 'clayallsopp/formotion', :branch => 'master'
 
 # Development
-gem 'awesome_print_motion'
+gem 'awesome_print_motion', :github => 'MohawkApps/awesome_print_motion', :branch => 'bubblewrap-debug'

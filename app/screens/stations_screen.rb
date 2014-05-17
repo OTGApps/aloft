@@ -29,14 +29,14 @@ class StationsScreen < PM::TableScreen
   end
 
   def refresh
-    ap "refreshing" if BW.debug?
+    ap "refreshing"
     Flurry.logEvent("REFRESH_STATIONS") unless Device.simulator?
 
     return alert_location_services_off unless BW::Location.enabled?
 
     BW::Location.get_once do |location|
       if location.is_a?(CLLocation)
-        ap "got location." if BW.debug?
+        ap "got location."
         find_stations(location)
       else
         alert_location_services_off

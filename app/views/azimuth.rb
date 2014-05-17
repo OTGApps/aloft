@@ -7,7 +7,7 @@ class Azimuth < UIImageView
       end
 
       App.notification_center.observe 'StopHeadingUpdates' do |notification|
-        ap 'Stopping heading updates.' if BW.debug?
+        ap 'Stopping heading updates.'
         animate_to_bearing
       end
     end
@@ -28,7 +28,7 @@ class Azimuth < UIImageView
 
   def animate_to_bearing
     if App::Persistence['compass'] == false
-      ap "Animating - compass is off" if BW.debug?
+      ap "Animating - compass is off"
       return spring_to_original_bearing
     end
 
