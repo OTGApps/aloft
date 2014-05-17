@@ -65,6 +65,7 @@ class WindsScreen < PM::TableScreen
   end
 
   def cell_background_color(index)
+    # This creates the pretty blue gradients on the cells.
     %w(18c1e0 29cae9 40d0eb 57d6ed 6edbf0 85e1f2 9ce7f4 b3ecf7 caf2f9)[index].to_color
   end
 

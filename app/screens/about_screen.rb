@@ -147,7 +147,15 @@ class AboutScreen < Formotion::FormController
     end
 
     observe(compass, 'value') do |old_value, new_value|
-      flurry_params = {on_off: new_value}
+      enabled = BW::Location.enabled?
+
+      if new_value == true && enabled == false
+        App.alert("Location Services\nAre Disabled", {
+          message: "Please enable location services for #{App.name} in the settings app in order to use dynamic wind indicators."
+        })
+      end
+
+      flurry_params = { on_off: new_value, location_enabled: enabled }
       Flurry.logEvent("COMPASS_SWITCH", withParameters:flurry_params) unless Device.simulator?
       App::Persistence['compass'] = new_value
     end
