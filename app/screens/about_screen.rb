@@ -147,7 +147,7 @@ class AboutScreen < Formotion::FormController
     end
 
     observe(compass, 'value') do |old_value, new_value|
-      enabled = BW::Location.enabled?
+      enabled = BW::Location.authorized?
 
       if new_value == true && enabled == false
         App.alert("Location Services\nAre Disabled", {

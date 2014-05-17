@@ -16,8 +16,8 @@ GIT
 
 GIT
   remote: git://github.com/rubymotion/BubbleWrap.git
-  revision: 3cff847ef5a04bd9886195bc90c437277d8ad1b8
-  branch: master
+  revision: 5fd753c714b0a47d6b802219181de478de07d502
+  branch: location-authorized
   specs:
     bubble-wrap (1.6.0)
       bubble-wrap-http (= 1.6.0)

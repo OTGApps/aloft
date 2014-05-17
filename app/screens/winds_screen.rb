@@ -27,7 +27,7 @@ class WindsScreen < PM::TableScreen
   end
 
   def init_compass
-    if !BW::Location.enabled? || App::Persistence['compass'] == false
+    if !BW::Location.authorized? || App::Persistence['compass'] == false
       stop_compass
       App.notification_center.post('StopHeadingUpdates', nil)
       return
