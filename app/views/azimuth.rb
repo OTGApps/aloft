@@ -52,7 +52,7 @@ class Azimuth < UIImageView
       initialSpringVelocity:0.2,
       options:UIViewAnimationOptionCurveLinear,
       animations: lambda {
-        radians = CGAffineTransformMakeRotation(@original_bearing.to_i * Math::PI / 180);
+        radians = CGAffineTransformMakeRotation((@original_bearing.to_i - 180) * Math::PI / 180)
         self.transform = radians
       },
       completion:lambda {|finished|
