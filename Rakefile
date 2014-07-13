@@ -12,13 +12,13 @@ end
 Motion::Project::App.setup do |app|
   # Use `rake config' to see complete project settings.
   app.name = 'aloft'
-  app.deployment_target = "7.0"
+  app.deployment_target = '7.0'
   app.device_family = [:iphone]
   app.interface_orientations = [:portrait, :portrait_upside_down]
   app.identifier = 'com.mohawkapps.aloft'
   app.seed_id = 'DW9QQZR4ZL'
-  app.version = "3"
-  app.short_version = "1.0.2"
+  app.version = '4'
+  app.short_version = '1.0.3'
   app.icons = Dir.glob("resources/Icon*.png").map{|icon| icon.split("/").last}
   app.prerendered_icon = true
   app.info_plist['APP_STORE_ID'] = 823834093
