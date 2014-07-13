@@ -123,6 +123,7 @@ class WindsScreen < PM::TableScreen
         background_color: cell_background_color(index),
         altitude: "#{number_with_delimiter(key)}ft",
         bearing: data['bearing'],
+        # bearing: 0, # Manual override for testing bearing animations
         speed: formatted_speed(data['speed']),
         temperature: formatted_temp(data['temp']),
         light_variable: data['bearing'].nil? && data['speed'].nil?
