@@ -124,8 +124,8 @@ class WindsScreen < PM::TableScreen
         altitude: "#{number_with_delimiter(key)}ft",
         bearing: data['bearing'],
         # bearing: 0, # Manual override for testing bearing animations
-        speed: formatted_speed(data['speed']),
-        temperature: formatted_temp(data['temp']),
+        speed: formatted(:speed, data['speed']),
+        temperature: formatted(:temp, data['temp']),
         light_variable: data['bearing'].nil? && data['speed'].nil?
       })
     else
@@ -160,19 +160,21 @@ class WindsScreen < PM::TableScreen
     update_table_data
   end
 
-  def formatted_temp(t)
+  def formatted(var, value)
     if App::Persistence['metric'] == true
-      t.celcius
+      case var
+      when :temp
+        value.celcius
+      when :speed
+        value.knots
+      end
     else
-      t.fahrenheit
-    end
-  end
-
-  def formatted_speed(s)
-    if App::Persistence['metric'] == true
-      s.knots
-    else
-      s.mph
+      case var
+      when :temp
+        value.fahrenheit
+      when :speed
+        value.mph
+      end
     end
   end
 
