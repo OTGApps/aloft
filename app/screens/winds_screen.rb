@@ -77,7 +77,7 @@ class WindsScreen < PM::TableScreen
 
       if w.is_a?(NSError)
         Flurry.logEvent("WINDSS_API_ERROR") unless Device.simulator?
-        ap "Got an error from the winds API"
+        p "Got an error from the winds API"
 
         App.alert("Error retrieving winds aloft", {
           message: "There was an error retrieving the winds aloft forecasts.\n\nPlease try again or email mark@mohawkapps.com\nfor support."
