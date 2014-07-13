@@ -25,6 +25,12 @@ class WindCell < PM::TableViewCell
     @light_variable.apply_style(:light_variable)
   end
 
+  def set_attributes(view, attrs)
+    [:altitude, :speed, :temperature, :azimuth, :light_variable, :bearing].each do |sym|
+      self.send(sym.to_s << '=', attrs[sym]) if attrs[sym]
+    end
+  end
+
   def altitude= a
     @altitude.get.text = a
   end

@@ -12,8 +12,8 @@ class WindsScreen < PM::TableScreen
     self.automaticallyAdjustsScrollViewInsets = false
     self.edgesForExtendedLayout = UIRectEdgeNone
 
-    set_nav_bar_right_button 'flag'.uiimage, action: :open_stations
-    set_nav_bar_left_button 'settings'.uiimage, action: :open_about
+    set_nav_bar_button :right, image: UIImage.imageNamed('flag'), action: :open_stations
+    set_nav_bar_button :left, image: UIImage.imageNamed('settings'), action: :open_about
   end
 
   def on_appear
@@ -106,17 +106,20 @@ class WindsScreen < PM::TableScreen
       editing_style: :none,
       selection_style: UITableViewCellSelectionStyleNone,
       cell_class: WindCell,
-      azimuth: azimuth_image,
-      bearing: nil,
-      speed: nil,
-      temp: nil
+      style: {
+        azimuth: azimuth_image,
+        bearing: nil,
+        speed: nil,
+        temp: nil
+      }
     }
   end
 
   def cell(index, key)
+    c = base_cell
     unless @winds.nil?
       data = @winds[key.to_s]
-      base_cell.merge({
+      c[:style].merge!({
         background_color: cell_background_color(index),
         altitude: "#{number_with_delimiter(key)}ft",
         bearing: data['bearing'],
@@ -125,11 +128,12 @@ class WindsScreen < PM::TableScreen
         light_variable: data['bearing'].nil? && data['speed'].nil?
       })
     else
-      base_cell.merge({
+      c[:style].merge!({
         background_color: cell_background_color(index),
         altitude: "#{number_with_delimiter(key)}ft",
       })
     end
+    c
   end
 
   def info_cell
