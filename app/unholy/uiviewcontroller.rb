@@ -17,27 +17,31 @@ class UIViewController
     if titleView.nil?
       created = true
 
-      titleView = UIView.alloc.initWithFrame CGRectZero
-      labelTitle = UILabel.alloc.initWithFrame CGRectZero
-      labelSubtitle = UILabel.alloc.initWithFrame CGRectZero
+      titleView = UIView.alloc.initWithFrame(CGRectZero)
+      labelTitle = UILabel.alloc.initWithFrame(CGRectZero)
+      labelSubtitle = UILabel.alloc.initWithFrame(CGRectZero)
 
-      labelTitle.shadowColor = Device.ios_version.to_f < 7.0 ? UIColor.darkGrayColor : UIColor.clearColor
-      labelTitle.textColor = UIColor.whiteColor
-      labelTitle.backgroundColor = UIColor.clearColor
-      labelTitle.textAlignment = UITextAlignmentCenter
-      labelTitle.lineBreakMode = UILineBreakModeTailTruncation
-      labelTitle.font = UIFont.boldSystemFontOfSize(18)
+      labelTitle.tap do |l|
+        l.shadowColor = Device.ios_version.to_f < 7.0 ? UIColor.darkGrayColor : UIColor.clearColor
+        l.textColor = UIColor.whiteColor
+        l.backgroundColor = UIColor.clearColor
+        l.textAlignment = UITextAlignmentCenter
+        l.lineBreakMode = UILineBreakModeTailTruncation
+        l.font = UIFont.boldSystemFontOfSize(18)
+      end
 
-      labelSubtitle.backgroundColor = UIColor.clearColor
-      labelSubtitle.textAlignment = UITextAlignmentCenter
-      labelSubtitle.lineBreakMode = UILineBreakModeTailTruncation
-      labelSubtitle.font = UIFont.systemFontOfSize(14)
-      labelSubtitle.textColor = labelTitle.textColor
-      labelSubtitle.shadowColor = labelTitle.shadowColor
-      labelSubtitle.shadowOffset = labelTitle.shadowOffset
+      labelSubtitle.tap do |l|
+        l.backgroundColor = UIColor.clearColor
+        l.textAlignment = UITextAlignmentCenter
+        l.lineBreakMode = UILineBreakModeTailTruncation
+        l.font = UIFont.systemFontOfSize(14)
+        l.textColor = labelTitle.textColor
+        l.shadowColor = labelTitle.shadowColor
+        l.shadowOffset = labelTitle.shadowOffset
+      end
 
-      titleView.addSubview labelTitle
-      titleView.addSubview labelSubtitle
+      titleView.addSubview(labelTitle)
+      titleView.addSubview(labelSubtitle)
     end
 
     labelTitle.text = title
