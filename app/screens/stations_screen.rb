@@ -98,7 +98,7 @@ class StationsScreen < PM::TableScreen
       distance_word = ' miles'
     end
 
-    "About #{distance}#{distance_word} away. #{city_state}"
+    "#{station[:code]} - About #{distance}#{distance_word} away. #{city_state}"
   end
 
   def select_station(args = {})
