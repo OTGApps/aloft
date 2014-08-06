@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/clayallsopp/formotion.git
-  revision: 5a09385703ef0be252d6367db8580eb538cbaeb3
+  revision: 829ab8ef8205fd8d53453747ac4b9683c4de2ccb
   specs:
     formotion (1.8)
       bubble-wrap (>= 1.4.0)
@@ -8,14 +8,13 @@ GIT
 
 GIT
   remote: git://github.com/clearsightstudio/ProMotion.git
-  revision: d989620adbbbefb2ad9007b4c66cb5bc6118c531
+  revision: eaa02d023389454e54e40c3113e1febd50240bd3
   specs:
-    ProMotion (2.0.0.rc4)
+    ProMotion (2.0.0)
       methadone (~> 1.4)
 
-GIT
-  remote: git://github.com/rubymotion/BubbleWrap.git
-  revision: b85e8eeae8cc96213403832a73d5d2cf1bcbd8a7
+PATH
+  remote: ../BubbleWrap
   specs:
     bubble-wrap (1.7.0)
       bubble-wrap-http (= 1.7.0)
@@ -63,7 +62,7 @@ GEM
     fuzzy_match (2.0.4)
     i18n (0.6.11)
     json_pure (1.8.1)
-    methadone (1.5.0)
+    methadone (1.5.1)
       bundler
     motion-cocoapods (1.5.0)
       cocoapods (>= 0.32.1)

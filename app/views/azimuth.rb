@@ -2,7 +2,7 @@ class Azimuth < UIImageView
   def observe_location
     @observing ||= begin
       App.notification_center.observe 'HeadingUpdate' do |notification|
-        @phone_heading = notification.object
+          @phone_heading = App::Persistence['magnetic'] ? notification.object[:magnetic_heading] : notification.object[:true_heading]
         animate_to_bearing
       end
 

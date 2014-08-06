@@ -39,6 +39,7 @@ class AppDelegate < ProMotion::Delegate
   def defaults
     App::Persistence['compass'] = true if App::Persistence['compass'].nil?
     App::Persistence['metric']  = false if App::Persistence['metric'].nil?
+    App::Persistence['magnetic']  = true if App::Persistence['magnetic'].nil?
   end
 
   def appearance

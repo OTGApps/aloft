@@ -1,4 +1,4 @@
-class AboutScreen < Formotion::FormController
+class SettingsScreen < Formotion::FormController
   include BW::KVO
 
   def init
@@ -15,6 +15,11 @@ class AboutScreen < Formotion::FormController
           subtitle: 'Updates direction based on compass.',
           type: :switch,
           value: App::Persistence['compass']
+        }, {
+          title: 'Use Magnetic North',
+          subtitle: 'Turning off will use true North.',
+          type: :switch,
+          value: App::Persistence['magnetic']
         }]
       },{
         title: 'Share With Your friends:',
@@ -139,6 +144,7 @@ class AboutScreen < Formotion::FormController
   def observe_switces
     metric = @form.sections[0].rows[0]
     compass = @form.sections[0].rows[1]
+    magnetic = @form.sections[0].rows[2]
 
     observe(metric, 'value') do |old_value, new_value|
       flurry_params = {on_off: new_value}
@@ -159,6 +165,11 @@ class AboutScreen < Formotion::FormController
       Flurry.logEvent("COMPASS_SWITCH", withParameters:flurry_params) unless Device.simulator?
       App::Persistence['compass'] = new_value
     end
-  end
 
+    observe(magnetic, 'value') do |old_value, new_value|
+      flurry_params = {on_off: new_value}
+      Flurry.logEvent("MAGNETIC_SWITCH", withParameters:flurry_params) unless Device.simulator?
+      App::Persistence['magnetic'] = new_value
+    end
+  end
 end

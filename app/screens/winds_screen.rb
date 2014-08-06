@@ -33,8 +33,8 @@ class WindsScreen < PM::TableScreen
       return
     end
 
-    BW::Location.get_compass do |heading|
-      App.notification_center.post('HeadingUpdate', heading[:magnetic_heading])
+    BW::Location.get_compass(calibration: true) do |location|
+      App.notification_center.post('HeadingUpdate', location)
     end
   end
 
@@ -49,7 +49,7 @@ class WindsScreen < PM::TableScreen
   end
 
   def open_about
-    open_modal UINavigationController.alloc.initWithRootViewController(AboutScreen.alloc.init)
+    open_modal UINavigationController.alloc.initWithRootViewController(SettingsScreen.alloc.init)
   end
 
   def table_data
