@@ -110,7 +110,7 @@ class WindsScreen < PM::TableScreen
         azimuth: azimuth_image,
         bearing: nil,
         speed: nil,
-        temp: nil
+        temperature: nil
       }
     }
   end
