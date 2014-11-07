@@ -4,12 +4,12 @@ class WindCell < PM::TableViewCell
   # This method is used by ProMotion to instantiate cells.
   def initWithStyle(style_name, reuseIdentifier: reuseIdentifier)
     super
-    @altitude       = rmq.append(UILabel)
-    @bearing        = rmq.append(UILabel)
-    @speed          = rmq.append(UILabel)
-    @temperature    = rmq.append(UILabel)
-    @azimuth        = rmq.append(Azimuth)
-    @light_variable = rmq.append(UILabel)
+    @altitude       = rmq.append(UILabel, :altitude)
+    @bearing        = rmq.append(UILabel, :bearing)
+    @speed          = rmq.append(UILabel, :speed)
+    @temperature    = rmq.append(UILabel, :temperature)
+    @azimuth        = rmq.append(Azimuth, :azimuth)
+    @light_variable = rmq.append(UILabel, :light_variable)
     self
   end
 
@@ -17,12 +17,7 @@ class WindCell < PM::TableViewCell
   def layoutSubviews
     # super # Remove this call to not draw the title and subtitle elements.
 
-    @altitude.apply_style(:altitude)
-    @azimuth.apply_style(:azimuth)
-    @bearing.apply_style(:bearing)
-    @speed.apply_style(:speed)
-    @temperature.apply_style(:temperature)
-    @light_variable.apply_style(:light_variable)
+    rmq.all.reapply_styles
   end
 
   def set_attributes(view, attrs)
