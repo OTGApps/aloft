@@ -8,7 +8,6 @@ gem 'bubble-wrap', :github => 'rubymotion/BubbleWrap', :require => ['bubble-wrap
 gem 'ProMotion', :github => 'clearsightstudio/ProMotion'
 gem 'afmotion'
 gem 'ruby_motion_query'
-gem 'formotion', :github => 'clayallsopp/formotion'
 
 # Development
 gem 'motion_print'

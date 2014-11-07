@@ -49,7 +49,7 @@ class WindsScreen < PM::TableScreen
   end
 
   def open_about
-    open_modal UINavigationController.alloc.initWithRootViewController(SettingsScreen.alloc.init)
+    open_modal SettingsScreen.new(nav_bar:true)
   end
 
   def table_data

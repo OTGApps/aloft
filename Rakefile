@@ -32,6 +32,8 @@ Motion::Project::App.setup do |app|
   }
   app.info_plist['NSLocationWhenInUseUsageDescription'] = 'We use your location to find NOAA weather stations near you.'
   app.info_plist['NSLocationAlwaysUsageDescription'] = 'We use your location to find NOAA weather stations near you.'
+  app.info_plist["UIViewControllerBasedStatusBarAppearance"] = false
+  app.info_plist["UIStatusBarStyle"] = "UIStatusBarStyleLightContent"
 
   app.entitlements['get-task-allow'] = true
   app.codesign_certificate = "iPhone Developer: Mark Rickert (YA2VZGDX4S)"

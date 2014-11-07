@@ -32,7 +32,8 @@ class StationsScreen < PM::TableScreen
     p "refreshing"
     Flurry.logEvent("REFRESH_STATIONS") unless Device.simulator?
 
-    BW::Location.get_once do |location|
+    BW::Location.get_once(purpose: 'To find the closest NOAA weather station.') do |location|
+      mp "Got location: #{location}"
       if location.is_a?(CLLocation)
         p "got location."
         find_stations(location)

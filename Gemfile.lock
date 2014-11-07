@@ -1,12 +1,4 @@
 GIT
-  remote: git://github.com/clayallsopp/formotion.git
-  revision: 1a411de24d58591a5ac64c17b78d305dc85a98c5
-  specs:
-    formotion (1.8)
-      bubble-wrap (>= 1.4.0)
-      motion-require (>= 0.1.0)
-
-GIT
   remote: git://github.com/clearsightstudio/ProMotion.git
   revision: 77b86eaf33295a86adfdfa040e20f9737ce16844
   specs:
@@ -85,7 +77,6 @@ DEPENDENCIES
   ProMotion!
   afmotion
   bubble-wrap!
-  formotion!
   motion-cocoapods
   motion_print
   ruby_motion_query
