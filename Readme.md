@@ -1,7 +1,7 @@
-# aloft [![Code Climate](https://codeclimate.com/github/MohawkApps/aloft.png)](https://codeclimate.com/github/MohawkApps/aloft)
+# aloft [![Code Climate](https://codeclimate.com/github/OTGApps/aloft.png)](https://codeclimate.com/github/OTGApps/aloft)
 ![App Icon](resources/Icon-120.png)
 
-#### A [RubyMotion](http://www.rubymotion.com/) application brought to you by [Mohawk Apps](http://www.mohawkapps.com/).
+#### A [RubyMotion](http://www.rubymotion.com/) application brought to you by [Off The Grid Apps](http://otgapps.io/).
 
 aloft is the beautiful new way to check NOAA winds aloft forecasts from your iOS device! 
 
@@ -19,7 +19,7 @@ Give aloft a try and you'll never need to figure out what "760253" means again!
 
 For the curious, "760253" means: Winds at 102 knots bearing 260 degrees at 53°C... or -53°C if above 24,000 feet. 
 
-This app is open source. Browse the source code here: https://github.com/MohawkApps/aloft/
+This app is open source. Browse the source code here: https://github.com/OTGApps/aloft/
 
 ## Download from the App Store
 
@@ -49,4 +49,4 @@ Icon by the talented [Mel Shields](http://dribbble.com/shieldsma91).
 2. Work on a feature branch.
 3. Send me a pull request.
 
-*I also like it when people who can't contribute [open an issue](https://github.com/MohawkApps/aloft/issues)*
+*I also like it when people who can't contribute [open an issue](https://github.com/OTGApps/aloft/issues)*
