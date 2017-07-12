@@ -40,7 +40,6 @@ Motion::Project::App.setup do |app|
   app.provisioning_profile = "./provisioning/development.mobileprovision"
 
   app.pods do
-    pod 'FlurrySDK'
     pod 'Appirater'
     pod 'Harpy'
   end

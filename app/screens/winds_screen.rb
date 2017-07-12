@@ -76,8 +76,8 @@ class WindsScreen < PM::TableScreen
       end_refreshing
 
       if w.is_a?(NSError)
-        Flurry.logEvent("WINDSS_API_ERROR") unless Device.simulator?
         p "Got an error from the winds API"
+        # Flurry.logEvent("WINDSS_API_ERROR") unless Device.simulator?
 
         App.alert("Error retrieving winds aloft", {
           message: "There was an error retrieving the winds aloft forecasts.\n\nPlease try again or email mark@mohawkapps.com\nfor support."
@@ -154,8 +154,8 @@ class WindsScreen < PM::TableScreen
   def toggle_metric
     App::Persistence['metric'] = !App::Persistence['metric']
 
-    flurry_params = {on_off: App::Persistence['metric']}
-    Flurry.logEvent("METRIC_SWITCH", withParameters:flurry_params) unless Device.simulator?
+    # flurry_params = {on_off: App::Persistence['metric']}
+    # Flurry.logEvent("METRIC_SWITCH", withParameters:flurry_params) unless Device.simulator?
 
     update_table_data
   end

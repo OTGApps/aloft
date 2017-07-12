@@ -11,7 +11,7 @@ module AboutCells
       action: :open_link,
       arguments: {
         url: 'http://www.mohawkapps.com',
-        flurry_action: 'WEBLINK_TAPPED'
+        # flurry_action: 'WEBLINK_TAPPED'
       }
     }]
   end

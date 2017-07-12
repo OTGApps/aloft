@@ -6,7 +6,7 @@ module OpensourceCells
       action: :open_link,
       arguments: {
         url: 'https://github.com/MohawkApps/aloft/',
-        flurry_action: 'GITHUB_TAPPED'
+        # flurry_action: 'GITHUB_TAPPED'
       }
     }, {
       title: 'Found a bug?',
@@ -15,7 +15,7 @@ module OpensourceCells
       action: :open_link,
       arguments: {
         url: 'https://github.com/MohawkApps/aloft/issues/',
-        flurry_action: 'GITHUB_ISSUE_TAPPED'
+        # flurry_action: 'GITHUB_ISSUE_TAPPED'
       }
     }, {
       title: 'Email me suggestions!',
@@ -26,7 +26,7 @@ module OpensourceCells
   end
 
   def open_link(args = {})
-    Flurry.logEvent(args[:flurry_action]) unless Device.simulator?
+    # Flurry.logEvent(args[:flurry_action]) unless Device.simulator?
 
     warn = {
       title: "Leaving #{App.name}",
@@ -52,9 +52,9 @@ module OpensourceCells
       message: "",
       animated: true
     }) do |result, error|
-      Flurry.logEvent("EMAIL_SENT") if result.sent? && !Device.simulator?
-      Flurry.logEvent("EMAIL_CANCELED") if result.canceled? && !Device.simulator?
-      Flurry.logEvent("EMAIL_FAILED") if result.failed? && !Device.simulator?
+      # Flurry.logEvent("EMAIL_SENT") if result.sent? && !Device.simulator?
+      # Flurry.logEvent("EMAIL_CANCELED") if result.canceled? && !Device.simulator?
+      # Flurry.logEvent("EMAIL_FAILED") if result.failed? && !Device.simulator?
     end
 
   end

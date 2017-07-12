@@ -20,8 +20,8 @@ class AppDelegate < ProMotion::Delegate
       app_id = App.info_plist['APP_STORE_ID']
 
       # Flurry
-      NSSetUncaughtExceptionHandler("uncaughtExceptionHandler")
-      Flurry.startSession("2ST55ZW4W4RT2X8X6WWQ")
+      # NSSetUncaughtExceptionHandler("uncaughtExceptionHandler")
+      # Flurry.startSession("2ST55ZW4W4RT2X8X6WWQ")
 
       # Appirater
       Appirater.setAppId app_id
@@ -53,9 +53,9 @@ class AppDelegate < ProMotion::Delegate
   end
 
   #Flurry exception handler
-  def uncaughtExceptionHandler(exception)
-    Flurry.logError("Uncaught", message:"Crash!", exception:exception)
-  end
+  # def uncaughtExceptionHandler(exception)
+    # Flurry.logError("Uncaught", message:"Crash!", exception:exception)
+  # end
 
   def will_enter_foreground
     Appirater.appEnteredForeground true unless Device.simulator?

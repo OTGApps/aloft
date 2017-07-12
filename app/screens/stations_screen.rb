@@ -30,7 +30,7 @@ class StationsScreen < PM::TableScreen
 
   def refresh
     p "refreshing"
-    Flurry.logEvent("REFRESH_STATIONS") unless Device.simulator?
+    # Flurry.logEvent("REFRESH_STATIONS") unless Device.simulator?
 
     BW::Location.get_once(purpose: 'To find the closest NOAA weather station.') do |location|
       mp "Got location: #{location}"
@@ -45,8 +45,8 @@ class StationsScreen < PM::TableScreen
 
   def found_stations(s)
     if s.is_a?(NSError)
-      Flurry.logEvent("STATIONS_API_ERROR") unless Device.simulator?
       p "Got an error from the stations API"
+      # Flurry.logEvent("STATIONS_API_ERROR") unless Device.simulator?
 
       App.alert("Error retrieving stations", {
         message: "There was an error retrieving the list of weather stations.\n\nPlease try again in a minute."
@@ -105,8 +105,8 @@ class StationsScreen < PM::TableScreen
   def select_station(args = {})
     App::Persistence['station'] = args[:station][:code]
 
-    flurry_params = {station: args[:station][:code]}
-    Flurry.logEvent("SELECTED_STATION", withParameters:flurry_params) unless Device.simulator?
+    # flurry_params = {station: args[:station][:code]}
+    # Flurry.logEvent("SELECTED_STATION", withParameters:flurry_params) unless Device.simulator?
 
     close
   end

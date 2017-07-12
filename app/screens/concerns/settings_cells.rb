@@ -40,7 +40,7 @@ module SettingsCells
     App::Persistence[args[:persistence]] = args[:value] || false
 
     # Log the change in Flurry
-    flurry_params = {on_off: args[:value]}
-    Flurry.logEvent("#{args[:persistence].upcase}_SWITCH", withParameters:flurry_params) unless Device.simulator?
+    # flurry_params = {on_off: args[:value]}
+    # Flurry.logEvent("#{args[:persistence].upcase}_SWITCH", withParameters:flurry_params) unless Device.simulator?
   end
 end

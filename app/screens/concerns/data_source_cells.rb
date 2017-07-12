@@ -5,7 +5,7 @@ module DataSourceCells
       action: :open_link,
       arguments: {
         url: 'http://aviationweather.gov/products/nws/all',
-        flurry_action: 'NOAA_TAPPED'
+        # flurry_action: 'NOAA_TAPPED'
       }
     # }, {
     #   type: :static_image,

@@ -18,15 +18,15 @@ module ShareCells
       animated: true,
       excluded: excluded_services
     ) do |activity_type, completed|
-      Flurry.logEvent("SHARE_COMPLETED") unless Device.simulator
+      # Flurry.logEvent("SHARE_COMPLETED") unless Device.simulator
     end
 
-    Flurry.logEvent("SHARE_TAPPED") unless Device.simulator?
+    # Flurry.logEvent("SHARE_TAPPED") unless Device.simulator?
   end
 
   def rate_itunes
     Appirater.rateApp
-    Flurry.logEvent("RATE_ITUNES_TAPPED") unless Device.simulator?
+    # Flurry.logEvent("RATE_ITUNES_TAPPED") unless Device.simulator?
   end
 
   def excluded_services

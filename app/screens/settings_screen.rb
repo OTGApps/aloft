@@ -9,7 +9,7 @@ class SettingsScreen < PM::TableScreen
 
   def on_load
     set_nav_bar_button :right, title: "Close", action: :close, system_item: :stop
-    Flurry.logEvent("VIEWED_ABOUT") unless Device.simulator?
+    # Flurry.logEvent("VIEWED_ABOUT") unless Device.simulator?
   end
 
   def table_data
