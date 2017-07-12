@@ -58,7 +58,9 @@ class WindsScreen < PM::TableScreen
     }]
   end
 
-  def on_refresh ; get_winds ; end
+  def on_refresh
+    get_winds
+  end
 
   def cell_height
     @cell_h ||= table_view.size.height / wind_heights.count
@@ -76,8 +78,8 @@ class WindsScreen < PM::TableScreen
       end_refreshing
 
       if w.is_a?(NSError)
-        p "Got an error from the winds API"
         # Flurry.logEvent("WINDSS_API_ERROR") unless Device.simulator?
+        mp "Got an error from the winds API"
 
         App.alert("Error retrieving winds aloft", {
           message: "There was an error retrieving the winds aloft forecasts.\n\nPlease try again or email mark@mohawkapps.com\nfor support."
