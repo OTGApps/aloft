@@ -13,11 +13,10 @@ Motion::Project::App.setup do |app|
   # Use `rake config' to see complete project settings.
   app.name = 'aloft'
 
-  app.sdk_version = "8.1"
-  app.deployment_target = '7.1'
+  app.deployment_target = '9.0'
 
   app.version = (`git rev-list HEAD --count`.strip.to_i).to_s
-  app.short_version = '1.0.4b2'
+  app.short_version = '1.0.5'
 
   app.device_family = [:iphone]
   app.interface_orientations = [:portrait, :portrait_upside_down]
@@ -38,6 +37,15 @@ Motion::Project::App.setup do |app|
   app.entitlements['get-task-allow'] = true
   app.codesign_certificate = "iPhone Developer: Mark Rickert (YA2VZGDX4S)"
   app.provisioning_profile = "./provisioning/development.mobileprovision"
+
+  app.info_plist["NSAppTransportSecurity"] = {
+    "NSExceptionDomains" => {
+      "mohawkapps.com" => {
+        "NSExceptionAllowsInsecureHTTPLoads" => true,
+        "NSIncludesSubdomains" => true
+      }
+    }
+  }
 
   app.pods do
     pod 'Appirater'
